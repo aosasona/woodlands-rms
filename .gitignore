@@ -1,0 +1,5 @@
+/vendor/
+.php-cs-fixer.*
+*.sqlite
+*.sqlite3
+*.db

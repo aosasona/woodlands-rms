@@ -1,0 +1,27 @@
+{
+	"name": "wytespace/phlo-demo",
+	"description": "Opinionated but flexible PHP web application boilerplate based on the Phlo framework",
+	"type": "project",
+	"license": "Apache-2.0",
+	"scripts": {
+		"start": "COMPOSER_PROCESS_TIMEOUT=9000 php -S localhost:12000 index.php",
+		"build": "echo \"No build command\"",
+		"migrate": "php migrate up"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Ayodeji O",
+			"email": "ayodeji@trulyao.dev"
+		}
+	],
+	"require": {
+		"ext-fileinfo": "*",
+		"trulyao/phlo": "^0.4.0",
+		"vlucas/phpdotenv": "^5.6"
+	}
+}
