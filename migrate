@@ -13,31 +13,6 @@ if (php_sapi_name() != "cli") {
     exit(1);
 }
 
-$rest_index = 1;
-$options = getopt("he", ["help", "editor"], $rest_index);
-if (isset($options["h"]) || isset($options["help"]) || (count($options) === 0 && $argc === 1)) {
-    print_help();
-}
-
-$command = $argv[$rest_index];
-switch ($command) {
-    case "up":
-        run_migrations();
-        break;
-    case "create":
-        $name = $argv[$rest_index + 1] ?? null;
-        create_migration($name, $options);
-        break;
-    case "help":
-        print_help();
-        break;
-    case "version":
-        $version = file_get_contents(__DIR__ . "/.version");
-        echo "Blank v{$version}" . PHP_EOL;
-        break;
-    default:
-        print_error("Invalid command: {$command}");
-}
 
 
 function print_help()
@@ -156,4 +131,30 @@ function read_until(string $end_is): string
     }
 
     return $result;
+}
+
+$rest_index = 1;
+$options = getopt("he", ["help", "editor"], $rest_index);
+if (isset($options["h"]) || isset($options["help"]) || (count($options) === 0 && $argc === 1)) {
+    print_help();
+}
+
+$command = $argv[$rest_index];
+switch ($command) {
+    case "up":
+        run_migrations();
+        break;
+    case "create":
+        $name = $argv[$rest_index + 1] ?? null;
+        create_migration($name, $options);
+        break;
+    case "help":
+        print_help();
+        break;
+    case "version":
+        $version = file_get_contents(__DIR__ . "/.version");
+        echo "Blank v{$version}" . PHP_EOL;
+        break;
+    default:
+        print_error("Invalid command: {$command}");
 }

@@ -11,16 +11,16 @@ FROM trafex/php-nginx:3.5.0
 
 # Comment the following lines to disable SQLite support
 #########################################################
-USER root
+# USER root
 
-RUN apk add --no-cache php83-sqlite3 php83-pdo_sqlite
+# RUN apk add --no-cache php83-sqlite3 php83-pdo_sqlite
 #########################################################
 
 # Comment the following lines to disable MySQL support
 #########################################################
-# USER root
-#
-# RUN apk add --no-cache php83-mysqli php83-pdo_mysql
+USER root
+
+RUN apk add --no-cache php83-mysqli php83-pdo_mysql
 #########################################################
 
 USER nobody
