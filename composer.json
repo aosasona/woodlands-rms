@@ -1,6 +1,6 @@
 {
-	"name": "wytespace/phlo-demo",
-	"description": "Opinionated but flexible PHP web application boilerplate based on the Phlo framework",
+	"name": "woodlands-gp/rms",
+	"description": "Code for the Woodlands GP RMS",
 	"type": "project",
 	"license": "Apache-2.0",
 	"scripts": {
