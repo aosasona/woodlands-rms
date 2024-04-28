@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a029a35601c460e6f655723d1d618d4f",
+    "content-hash": "ed930cdcbcdfd78dbef9eb0627d2a23b",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -502,12 +502,40 @@
                 }
             ],
             "time": "2023-11-12T22:43:29+00:00"
+        },
+        {
+            "name": "woodlands/core",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./core",
+                "reference": "28ee0bd7befaa6389f20ef9c3c2fa85ca2fbebcf"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Woodlands\\Core\\": "src/"
+                }
+            },
+            "license": [
+                "Apache"
+            ],
+            "description": "Core package shared by all projects in the Woodlands GP",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "woodlands/core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

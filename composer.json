@@ -1,5 +1,5 @@
 {
-	"name": "woodlands-gp/rms",
+	"name": "woodlands/rms",
 	"description": "Code for the Woodlands GP RMS",
 	"type": "project",
 	"license": "Apache-2.0",
@@ -19,9 +19,19 @@
 			"email": "ayodeji@trulyao.dev"
 		}
 	],
+	"repositories": [
+		{
+			"type": "path",
+			"url": "./core",
+			"options": {
+				"symlink": true
+			}
+		}
+	],
 	"require": {
 		"ext-fileinfo": "*",
 		"trulyao/phlo": "^0.4.0",
-		"vlucas/phpdotenv": "^5.6"
+		"vlucas/phpdotenv": "^5.6",
+		"woodlands/core": "@dev"
 	}
 }
