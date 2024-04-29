@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 declare(strict_types=1);
 
-require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__."/vendor/autoload.php";
 
-use App\Error\Handler;
+use Woodlands\Core\Error\Handler;
 use Phlo\Core\{Router, Rule, RuleType};
 
 try {
@@ -30,5 +30,5 @@ try {
         Handler::displayError($e);
     }
 
-    echo "Internal Server Error";
+    echo "<p style=\"font-family: Monospace;padding:2rem 1rem;\">Internal Server Error</p>";
 }
