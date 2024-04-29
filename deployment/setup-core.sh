@@ -19,14 +19,15 @@ if [ -d "../core" ]; then
   echo "Core module found in the parent directory. Copying..."
   cp -r ../core core
   exit 0
+else 
+  # Check if the repository is private
+  if [ -z "$GITHUB_TOKEN" ]; then
+    echo "No GITHUB_TOKEN variable provided. Exiting..."
+    exit 1
+  fi
 fi
 
 
-# Check if the repository is private
-if [ -z "$GITHUB_TOKEN" ]; then
-  echo "No GITHUB_TOKEN variable provided. Exiting..."
-  exit 1
-fi
 
 # If not in the local filesystem, clone from remote repository
 echo "Core module not found locally. Cloning from remote repository..."

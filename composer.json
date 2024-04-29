@@ -5,7 +5,8 @@
 	"license": "Apache-2.0",
 	"scripts": {
 		"start": "COMPOSER_PROCESS_TIMEOUT=9000 php -S localhost:12000 index.php",
-		"build": "echo \"No build command\""
+		"build": "echo \"No build command\"",
+		"migrate": "php core/migrate up"
 	},
 	"autoload": {
 		"psr-4": {

@@ -4,23 +4,37 @@ services:
   web:
     build:
       context: .
+    restart: always
     volumes:
       - ../core:/var/www/core
       - ./:/var/www/html
     ports:
       - "8080:8080"
+    depends_on:
+      - woodlands_db
 
   woodlands_db:
-    image: mysql:8.3.0
+    image: mariadb:latest
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_USER: "woodlands"
-      MYSQL_PASSWORD: "W00dland5"
+      MARIADB_ROOT_USER: "root"
+      MARIADB_ROOT_PASSWORD: "W00dland5R00t"
+      MARIADB_DATABASE: "woodlands"
+      MARIADB_USER: "woodlands"
+      MARIADB_PASSWORD: "W00dland5"
     volumes:
       - mysqldata:/var/lib/mysql
       - mysqlconf:/etc/mysql/conf.d/
     ports:
       - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    environment:
+      - PMA_ARBITRARY=1
 
   composer:
     build:
