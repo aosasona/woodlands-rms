@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed930cdcbcdfd78dbef9eb0627d2a23b",
+    "content-hash": "bb2ae866536c0856ca4477359f8a07c4",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -505,20 +505,29 @@
         },
         {
             "name": "woodlands/core",
-            "version": "dev-main",
+            "version": "dev-move-db-stuff",
             "dist": {
                 "type": "path",
                 "url": "./core",
-                "reference": "28ee0bd7befaa6389f20ef9c3c2fa85ca2fbebcf"
+                "reference": "7852082b28e9509c0a3e7e23c77e132b138ad69e"
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.1",
+                "vlucas/phpdotenv": "^5.6@dev"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Woodlands\\Core\\": "src/"
                 }
+            },
+            "scripts": {
+                "gen:schema": [
+                    "dbml2sql ./data/schema/source.dbml -o ./data/schema/schema.sql --mysql"
+                ],
+                "migrate": [
+                    "php migrate up"
+                ]
             },
             "license": [
                 "Apache"

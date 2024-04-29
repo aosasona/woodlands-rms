@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "COMPOSER_PROCESS_TIMEOUT=9000 php -S localhost:12000 index.php",
 		"build": "echo \"No build command\"",
-		"migrate": "php migrate up"
+		"migrate": "php core/migrate up"
 	},
 	"autoload": {
 		"psr-4": {
@@ -31,7 +31,6 @@
 	"require": {
 		"ext-fileinfo": "*",
 		"trulyao/phlo": "^0.4.0",
-		"vlucas/phpdotenv": "^5.6",
 		"woodlands/core": "@dev"
 	}
 }

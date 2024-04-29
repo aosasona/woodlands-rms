@@ -2,13 +2,51 @@ version: "3"
 
 services:
   web:
-    # image: trafex/php-nginx
-    # container_name: "app"
     build:
       context: .
+    restart: always
     volumes:
+      - ../core:/var/www/core
       - ./:/var/www/html
-    environment:
-      APP_ENV: "dev"
     ports:
       - "8080:8080"
+    depends_on:
+      - woodlands_db
+
+  woodlands_db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MARIADB_ROOT_USER: "root"
+      MARIADB_ROOT_PASSWORD: "W00dland5R00t"
+      MARIADB_DATABASE: "woodlands"
+      MARIADB_USER: "woodlands"
+      MARIADB_PASSWORD: "W00dland5"
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - mysqlconf:/etc/mysql/conf.d/
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    environment:
+      - PMA_ARBITRARY=1
+
+  composer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: .
+    entrypoint: /usr/bin/composer
+    volumes:
+      - ./:./
+    profiles:
+      - composer
+
+volumes:
+  mysqldata: {}
+  mysqlconf: {}

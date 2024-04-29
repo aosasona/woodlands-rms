@@ -1,10 +1,19 @@
 FROM composer:2.7.2 AS composer
 
-COPY . /app
+ARG APP_ENV ?= production
+ARG GITHUB_TOKEN
+
+ENV APP_ENV ${APP_ENV}
+ENV GITHUB_TOKEN ${GITHUB_TOKEN}
+
+WORKDIR /app
+
+COPY . .
+
+# RUN sh ./deployment/setup-core.sh
 
 RUN composer install --optimize-autoloader --no-interaction --no-progress && \
-  composer dump-autoload --optimize && \
-  composer migrate
+  composer dump-autoload --optimize
 
 FROM trafex/php-nginx:3.5.0
 
