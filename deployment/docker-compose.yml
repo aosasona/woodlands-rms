@@ -47,6 +47,14 @@ services:
     profiles:
       - composer
 
+  tailwind-builder:
+    build:
+      context: .
+      dockerfile: ./deployment/tw.Dockerfile
+    volumes:
+      - ./src/css:/app/in
+      - ./public/css:/app/out
+
 volumes:
   mysqldata: {}
   mysqlconf: {}
