@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "watch": "nodemon --exec \"npm run tw\"",
-    "tw": "tailwindcss -i ./in/source.css -o ./out/styles.css -c ./tailwind.config.js"
+    "watch": "nodemon --exec \"npm run build:tw\" --watch \"./pages/**/*\" --watch \"./src/**/*\" -e php,html,css,js",
+    "build:tw": "tailwindcss -i ./in/source.css -o ./out/styles.css -c ./tailwind.config.js",
+    "tw": "tailwindcss -i ./in/source.css -o ./out/styles.css -c ./tailwind.config.js --watch"
   },
   "keywords": [],
   "author": "",

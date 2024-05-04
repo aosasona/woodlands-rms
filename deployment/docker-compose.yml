@@ -54,6 +54,8 @@ services:
     volumes:
       - ./src/css:/app/in
       - ./public/css:/app/out
+      - ./pages:/app/pages
+      - ./src:/app/src
 
 volumes:
   mysqldata: {}
