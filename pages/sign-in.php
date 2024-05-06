@@ -8,7 +8,6 @@ use Woodlands\Core\Exceptions\AppException;
 
 /** @var Context $ctx **/
 
-
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $email = $ctx->bodyOr("email", "");
@@ -45,7 +44,7 @@ $layout = Layout::start("Sign In");
 
         <input class="uk-input" type="text" name="email" placeholder="E-mail address" aria-label="E-mail address" required />
 
-        <input class="uk-input" type="text" name="passsword" placeholder="Password" aria-label="Password" required />
+        <input class="uk-input" type="password" name="password" placeholder="Password" aria-label="Password" required />
 
         <div class="flex w-full justify-between items-center">
           <div class="flex items-center space-x-2 -ml-2">
