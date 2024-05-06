@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --color-primary-blue: #0512FE;
+    --color-primary-purple: #81057F;
+    --color-primary-pink: #FDC0CB;
+    --color-secondary-grey: #D0D8DC;
+    --color-success: #84FE70;
+    --color-notice: #FEDE67;
+    --color-error: #FC6A3A;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,8 +23,28 @@
 html,
 body {
     font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    background-color: #09090b;
-    color: #d4d4d8;
+    font-size: 0.9rem;
     line-height: 1.5;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.uk-button {
+    background-color: var(--color-primary-blue);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.uk-input {
+    &:focus {
+        border-color: var(--color-primary-blue);
+    }
+}
+
+.uk-toggle-switch {
+    scale: 0.75;
 }

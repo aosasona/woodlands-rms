@@ -9341,8 +9341,321 @@ video {
   --tw-contain-style: 
 }
 
+@media (max-width: 959px){
+  .uk-form-horizontal .uk-form-label{
+    display:block;
+    margin-bottom:5px
+  }
+}
+
+@media (min-width: 960px){
+  .uk-form-horizontal .uk-form-label{
+    width:200px;
+    margin-top:7px;
+    float:left
+  }
+
+  .uk-form-horizontal .uk-form-controls{
+    margin-left:215px
+  }
+
+  .uk-form-horizontal .uk-form-controls-text{
+    padding-top:7px
+  }
+}
+
+.uk-button{
+  margin:0;
+  border:none;
+  overflow:visible;
+  font:inherit;
+  color:inherit;
+  text-transform:none;
+  text-transform:uppercase;
+  -webkit-appearance:none;
+  border-radius:0;
+  display:inline-block;
+  box-sizing:border-box;
+  padding:0 30px;
+  vertical-align:middle;
+  font-size:0.875rem;
+  line-height:38px;
+  text-align:center;
+  text-decoration:none;
+  transition:0.1s ease-in-out;
+  transition-property:color, background-color, border-color
+}
+
+.uk-button:not(:disabled){
+  cursor:pointer
+}
+
+.uk-button::-moz-focus-inner{
+  border:0;
+  padding:0
+}
+
+.uk-button:hover{
+  text-decoration:none
+}
+
+.uk-button-group > .uk-button:nth-child(n + 2), .uk-button-group > div:nth-child(n + 2) .uk-button{
+  margin-left:-1px
+}
+
+.uk-button-group .uk-button:hover, .uk-button-group .uk-button:focus, .uk-button-group .uk-button:active, .uk-button-group .uk-button.uk-active{
+  position:relative;
+  z-index:1
+}
+
+.uk-input, .uk-select, .uk-textarea, .uk-radio, .uk-checkbox{
+  box-sizing:border-box;
+  margin:0;
+  border-radius:0;
+  font:inherit
+}
+
+.uk-input{
+  overflow:visible
+}
+
+.uk-input[type="search"]::-webkit-search-cancel-button, .uk-input[type="search"]::-webkit-search-decoration{
+  -webkit-appearance:none
+}
+
+.uk-input[type="number"]::-webkit-inner-spin-button, .uk-input[type="number"]::-webkit-outer-spin-button{
+  height:auto
+}
+
+.uk-input::-moz-placeholder, .uk-textarea::-moz-placeholder{
+  opacity:1
+}
+
+.uk-input, .uk-textarea{
+  -webkit-appearance:none
+}
+
+.uk-input, .uk-select, .uk-textarea{
+  max-width:100%;
+  width:100%;
+  border:0 none;
+  border:1px solid #e5e5e5;
+  padding:0 10px;
+  background-color:#fff;
+  color:#666;
+  transition:0.2s ease-in-out;
+  transition-property:color, background-color, border
+}
+
+.uk-input, .uk-select:not([multiple]):not([size]){
+  height:40px;
+  vertical-align:middle;
+  display:inline-block
+}
+
+.uk-input:not(input), .uk-select:not(select){
+  line-height:38px
+}
+
+.uk-input:focus, .uk-select:focus, .uk-textarea:focus{
+  outline:none;
+  background-color:#fff;
+  color:#666;
+  border-color:#1e87f0
+}
+
+.uk-input:disabled, .uk-select:disabled, .uk-textarea:disabled{
+  background-color:#f8f8f8;
+  color:#999;
+  border-color:#e5e5e5
+}
+
+.uk-input::-moz-placeholder{
+  color:#999
+}
+
+.uk-input::placeholder{
+  color:#999
+}
+
+.uk-input[list]{
+  padding-right:20px;
+  background-repeat:no-repeat;
+  background-position:100% 50%
+}
+
+.uk-input[list]:hover, .uk-input[list]:focus{
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2224%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23666%22%20points%3D%2212%2012%208%206%2016%206%22%20%2F%3E%0A%3C%2Fsvg%3E%0A")
+}
+
+.uk-input[list]::-webkit-calendar-picker-indicator{
+  display:none !important
+}
+
+.uk-form-label{
+  color:#333;
+  font-size:0.875rem
+}
+
+.uk-form-stacked .uk-form-label{
+  display:block;
+  margin-bottom:5px
+}
+
+.uk-form-icon:not(.uk-form-icon-flip) ~ .uk-input{
+  padding-left:40px !important
+}
+
+.uk-form-icon-flip ~ .uk-input{
+  padding-right:40px !important
+}
+
+.uk-toggle-switch{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  position:relative;
+  width:3.5rem;
+  height:2rem;
+  box-sizing:border-box;
+  border-radius:2rem;
+  background-color:#e5e5e5
+}
+
+.uk-toggle-switch::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  transform:translate(0, -50%);
+  box-sizing:border-box;
+  width:1.75rem;
+  height:1.75rem;
+  border-radius:50%;
+  background-color:#fff;
+  transition-property:left, background-color;
+  transition-duration:.3s;
+  transition-timing-function:ease-in-out;
+  margin-left:0.125rem
+}
+
+.uk-toggle-switch:checked::before{
+  left:1.5rem
+}
+
+.uk-toggle-switch:disabled{
+  opacity:0.5
+}
+
+.uk-toggle-switch-secondary:checked{
+  background-color:#222222
+}
+
+.uk-form-horizontal .uk-form-label{
+}
+
 .static{
   position:static
+}
+
+.mx-auto{
+  margin-left:auto;
+  margin-right:auto
+}
+
+.my-auto{
+  margin-top:auto;
+  margin-bottom:auto
+}
+
+.-ml-2{
+  margin-left:-0.5rem
+}
+
+.mt-6{
+  margin-top:1.5rem
+}
+
+.flex{
+  display:flex
+}
+
+.grid{
+  display:grid
+}
+
+.hidden{
+  display:none
+}
+
+.h-full{
+  height:100%
+}
+
+.min-h-screen{
+  min-height:100vh
+}
+
+.w-full{
+  width:100%
+}
+
+.grid-cols-1{
+  grid-template-columns:repeat(1, minmax(0, 1fr))
+}
+
+.flex-col{
+  flex-direction:column
+}
+
+.items-center{
+  align-items:center
+}
+
+.justify-end{
+  justify-content:flex-end
+}
+
+.justify-between{
+  justify-content:space-between
+}
+
+.gap-y-4{
+  row-gap:1rem
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse:0;
+  margin-right:calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+
+.bg-brand-pink{
+  background-color:var(--color-primary-pink)
+}
+
+.px-8{
+  padding-left:2rem;
+  padding-right:2rem
+}
+
+.text-3xl{
+  font-size:1.875rem;
+  line-height:2.25rem
+}
+
+.font-bold{
+  font-weight:700
+}
+
+:root {
+  --color-primary-blue: #0512FE;
+  --color-primary-purple: #81057F;
+  --color-primary-pink: #FDC0CB;
+  --color-secondary-grey: #D0D8DC;
+  --color-success: #84FE70;
+  --color-notice: #FEDE67;
+  --color-error: #FC6A3A;
 }
 
 * {
@@ -9354,8 +9667,47 @@ video {
 html,
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  background-color: #09090b;
-  color: #d4d4d8;
+  font-size: 0.9rem;
   line-height: 1.5;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.uk-button {
+  background-color: var(--color-primary-blue);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.uk-input {
+  &:focus {
+    border-color: var(--color-primary-blue);
+  }
+}
+
+.uk-toggle-switch {
+  scale: 0.75;
+}
+
+@media (min-width: 1024px){
+  .lg\:block{
+    display:block
+  }
+
+  .lg\:w-4\/6{
+    width:66.666667%
+  }
+
+  .lg\:grid-cols-2{
+    grid-template-columns:repeat(2, minmax(0, 1fr))
+  }
+
+  .lg\:px-2{
+    padding-left:0.5rem;
+    padding-right:0.5rem
+  }
 }

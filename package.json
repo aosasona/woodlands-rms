@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "watch": "nodemon --exec \"npm run build:tw\" --watch \"./pages/**/*\" --watch \"./src/**/*\" -e php,html,css,js",
+    "watch": "nodemon --exec \"npm run build:tw\" --watch \"./tailwind.config.js\" --watch \"./pages/**/*\" --watch \"./src/**/*\" --watch \"./in/**/*\" -e php,html,css,js",
     "build:tw": "tailwindcss -i ./in/source.css -o ./out/styles.css -c ./tailwind.config.js",
     "tw": "tailwindcss -i ./in/source.css -o ./out/styles.css -c ./tailwind.config.js --watch"
   },

@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 require_once __DIR__."/vendor/autoload.php";
 
-use Woodlands\Core\Error\Handler;
+use Woodlands\Core\FaultHandler as Handler;
 use Phlo\Core\{Router, Rule, RuleType};
 
 try {
@@ -17,6 +17,11 @@ try {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->safeLoad();
     } catch(Exception) {
+    }
+
+    // Initialize seesson
+    if(session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
     }
 
     Router::new()
