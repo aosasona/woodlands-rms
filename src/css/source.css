@@ -32,6 +32,20 @@ p {
     margin: 0;
 }
 
+nav {
+    & a, input[type="submit"]  {
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            color: theme("colors.brand.pink");
+            text-decoration: none;
+        }
+    }
+}
+
 .uk-button {
     background-color: var(--color-primary-blue);
     color: white;

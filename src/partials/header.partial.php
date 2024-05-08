@@ -1,5 +1,7 @@
 <?php
 
+use Woodlands\Core\Auth;
+
 /**
  * @var string $title
  * @var string $description
@@ -24,3 +26,8 @@
 </head>
 
 <body>
+<?php
+if(Auth::isLoggedIn()) {
+    require_once __DIR__ . '/../partials/nav.partial.php';
+}
+?>

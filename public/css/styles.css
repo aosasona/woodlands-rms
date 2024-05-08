@@ -9558,6 +9558,22 @@ video {
   position:static
 }
 
+.fixed{
+  position:fixed
+}
+
+.left-0{
+  left:0px
+}
+
+.right-0{
+  right:0px
+}
+
+.top-0{
+  top:0px
+}
+
 .mx-auto{
   margin-left:auto;
   margin-right:auto
@@ -9588,6 +9604,10 @@ video {
   display:none
 }
 
+.h-20{
+  height:5rem
+}
+
 .h-full{
   height:100%
 }
@@ -9598,6 +9618,10 @@ video {
 
 .w-full{
   width:100%
+}
+
+.w-screen{
+  width:100vw
 }
 
 .grid-cols-1{
@@ -9620,6 +9644,14 @@ video {
   justify-content:space-between
 }
 
+.justify-around{
+  justify-content:space-around
+}
+
+.gap-4{
+  gap:1rem
+}
+
 .gap-y-4{
   row-gap:1rem
 }
@@ -9632,6 +9664,10 @@ video {
 
 .bg-brand-pink{
   background-color:var(--color-primary-pink)
+}
+
+.bg-brand-purple{
+  background-color:var(--color-primary-purple)
 }
 
 .px-8{
@@ -9674,6 +9710,19 @@ body {
 p {
   padding: 0;
   margin: 0;
+}
+
+nav {
+  & a, input[type="submit"]  {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      color: var(--color-primary-pink);
+      text-decoration: none;
+    }
+  }
 }
 
 .uk-button {

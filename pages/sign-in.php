@@ -8,6 +8,10 @@ use Woodlands\Core\Exceptions\AppException;
 
 /** @var Context $ctx **/
 
+if(Auth::isLoggedIn()) {
+    $ctx->redirect("/");
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $email = $ctx->bodyOr("email", "");
