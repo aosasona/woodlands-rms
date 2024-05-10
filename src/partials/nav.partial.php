@@ -8,15 +8,15 @@ $email = $user?->email ?? "unknown";
 ?>
 
 <nav class="w-screen fixed top-0 right-0 left-0 bg-brand-purple z-50">
-  <div class="h-20 container mx-auto flex items-center justify-around" id="parent-nav-links">
+  <div class="h-20 container mx-auto flex items-center justify-center gap-x-40" id="parent-nav-links">
     <img src="/public/images/logo.jpg" class="h-14 aspect-square" alt="Woodlands Logo" />
 
     <div data-nav-link="records">
       <a href="#">Records</a>
 
       <div data-anchor="records" class="hidden">
-        <a href="/records/students">Student records</a>
-        <a href="/records/staffs">Staff records</a>
+        <a href="/students">Student records</a>
+        <a href="/staffs">Staff records</a>
       </div>
     </div>
 

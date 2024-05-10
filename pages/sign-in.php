@@ -3,7 +3,7 @@
 use Phlo\Core\Context;
 use App\UI\Layout;
 use Woodlands\Core\Auth;
-use Woodlands\Core\Models\UserType;
+use Woodlands\Core\Models\Enums\UserType;
 use Woodlands\Core\Exceptions\AppException;
 
 /** @var Context $ctx **/

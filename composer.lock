@@ -505,11 +505,11 @@
         },
         {
             "name": "woodlands/core",
-            "version": "dev-move-db-stuff",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "./core",
-                "reference": "7852082b28e9509c0a3e7e23c77e132b138ad69e"
+                "reference": "524618bf377c08d8b2139e287d9944669e614b0b"
             },
             "require": {
                 "php": "^8.1",

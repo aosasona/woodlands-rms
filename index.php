@@ -27,7 +27,6 @@ try {
     Router::new()
         ->addRule(Rule::new("api")->setRuleType(RuleType::API)->setTarget(__DIR__ . "/api"))
         ->addRule(Rule::new("public")->setRuleType(RuleType::STATIC)->setTarget(__DIR__ . "/public"))
-        ->addRule(Rule::new("sticky")->setRuleType(RuleType::STICKY)->setTarget(__DIR__ . "/pages/index.html"))
         ->addRule(Rule::new("")->setRuleType(RuleType::STATIC)->setTarget(__DIR__ . "/pages"))
         ->serve();
 } catch (Exception | Error $e) {

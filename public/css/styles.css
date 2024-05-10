@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 /*! UIkit 3.20.8 | https://www.getuikit.com | (c) 2014 - 2024 YOOtheme | MIT License */
 
 html{
@@ -9433,6 +9435,28 @@ video {
   text-decoration:none
 }
 
+.uk-button-primary{
+  background-color:#1e87f0;
+  color:#fff;
+  border:1px solid transparent
+}
+
+.uk-button-primary:hover{
+  background-color:#0f7ae5;
+  color:#fff
+}
+
+.uk-button-primary:active, .uk-button-primary.uk-active{
+  background-color:#0e6dcd;
+  color:#fff
+}
+
+.uk-button-default:disabled, .uk-button-primary:disabled, .uk-button-secondary:disabled, .uk-button-danger:disabled{
+  background-color:transparent;
+  color:#999;
+  border-color:#e5e5e5
+}
+
 .uk-button-group > .uk-button:nth-child(n + 2), .uk-button-group > div:nth-child(n + 2) .uk-button{
   margin-left:-1px
 }
@@ -9440,6 +9464,12 @@ video {
 .uk-button-group .uk-button:hover, .uk-button-group .uk-button:focus, .uk-button-group .uk-button:active, .uk-button-group .uk-button.uk-active{
   position:relative;
   z-index:1
+}
+
+.uk-button-primary:focus{
+}
+
+.uk-button-primary:disabled{
 }
 
 .uk-input, .uk-select, .uk-textarea, .uk-radio, .uk-checkbox{
@@ -9626,6 +9656,10 @@ video {
   margin-left:-0.5rem
 }
 
+.mt-4{
+  margin-top:1rem
+}
+
 .mt-6{
   margin-top:1.5rem
 }
@@ -9686,12 +9720,17 @@ video {
   justify-content:flex-end
 }
 
+.justify-center{
+  justify-content:center
+}
+
 .justify-between{
   justify-content:space-between
 }
 
-.justify-around{
-  justify-content:space-around
+.gap-x-40{
+  -moz-column-gap:10rem;
+       column-gap:10rem
 }
 
 .gap-y-4{
@@ -9744,14 +9783,24 @@ video {
 
 html,
 body {
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9rem;
+  font-family: "Inter", "Roboto", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
   line-height: 1.5;
 }
 
 p {
   padding: 0;
   margin: 0;
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+main.container {
+  margin-top: 7rem;
+  margin-inline: auto;
 }
 
 nav {
@@ -9832,11 +9881,22 @@ nav {
   }
 }
 
-.uk-button {
+.uk-button-primary {
   background-color: var(--color-primary-blue);
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
+  &:hover {
+    background-color: white;
+    color: var(--color-primary-blue);
+    border: 1px solid var(--color-primary-blue);
+  }
+}
+
+.uk-breadcrumb {
+  & a:hover {
+    color: var(--color-primary-purple) !important;
+  }
 }
 
 .uk-input {
