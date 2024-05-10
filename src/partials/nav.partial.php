@@ -1,7 +1,10 @@
 <?php
 
 use Phlo\Extensions\CSRFToken;
+use Woodlands\Core\Auth;
 
+$user = Auth::user();
+$email = $user?->email ?? "unknown";
 ?>
 
 <nav class="w-screen fixed top-0 right-0 left-0 bg-brand-purple z-50">
@@ -12,8 +15,8 @@ use Phlo\Extensions\CSRFToken;
       <a href="#">Records</a>
 
       <div data-anchor="records" class="hidden">
-        <a href="/students">Student records</a>
-        <a href="/staffs">Staff records</a>
+        <a href="/records/students">Student records</a>
+        <a href="/records/staffs">Staff records</a>
       </div>
     </div>
 
@@ -29,7 +32,9 @@ use Phlo\Extensions\CSRFToken;
 
     <form action="/api/logout" method="POST">
       <?php echo CSRFToken::input(field_name: "__csrf_token") ?>
-      <input type="submit" name="logout" value="Logout" />
+      <div uk-tooltip="<?= "Signed in as {$email}" ?>">
+        <input type="submit" name="logout" value="Logout" />
+      </div>
     </form>
 
   </div>

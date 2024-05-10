@@ -5,6 +5,7 @@ import hooks from "franken-ui/shadcn-ui/hooks";
 
 const shadcn = hooks()
 
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./pages/**/*.{html,php,js}", "./src/**/*.{html,php,js}"],
@@ -51,8 +52,12 @@ export default {
         notification: {
           hooks: {},
           media: true
-        }
+        },
+        tooltip: {
+          hooks: {}
+        },
       }
-    })],
+    })
+  ],
 }
 

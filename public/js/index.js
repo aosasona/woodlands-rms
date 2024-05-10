@@ -4,9 +4,6 @@ $(function () {
 
 function handleNav() {
     $("[data-nav-link]").on("click mouseenter", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
         const submenu = $(this).data("nav-link");
         const target = $(`[data-anchor="${submenu}"]`);
         if (!target.length) return;
