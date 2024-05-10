@@ -1,7 +1,26 @@
-// Yes, jQuery syntax is used here. It's just for demonstration purposes 'cause why now?
-const $ = document.querySelector.bind(document);
+$(function () {
+    handleNav();
+})
 
-function handleClick() {
-    const counter = $('#counter');
-    counter.textContent = parseInt(counter.textContent) + 1;
+function handleNav() {
+    $("[data-nav-link]").on("click mouseenter", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const submenu = $(this).data("nav-link");
+        const target = $(`[data-anchor="${submenu}"]`);
+        if (!target.length) return;
+
+        target.addClass("flex");
+        target.removeClass("hidden");
+    })
+
+    $("[data-nav-link]").on("mouseleave", function () {
+        const submenu = $(this).data("nav-link");
+        const target = $(`[data-anchor="${submenu}"]`);
+        if (!target.length) return;
+
+        target.removeClass("flex");
+        target.addClass("hidden");
+    })
 }

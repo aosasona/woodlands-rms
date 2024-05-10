@@ -5,13 +5,13 @@
 @tailwind utilities;
 
 :root {
-    --color-primary-blue: #0512FE;
-    --color-primary-purple: #81057F;
-    --color-primary-pink: #FDC0CB;
-    --color-secondary-grey: #D0D8DC;
-    --color-success: #84FE70;
-    --color-notice: #FEDE67;
-    --color-error: #FC6A3A;
+    --color-primary-blue: hsl(237, 99%, 51%);
+    --color-primary-purple: hsl(301, 93%, 26%);
+    --color-primary-pink: hsl(349, 94%, 87%);
+    --color-secondary-grey: hsl(200, 15%, 84%);
+    --color-success: hsl(112, 99%, 72%);
+    --color-notice: hsl(47, 99%, 70%);
+    --color-error: hsl(15, 97%, 61%);
 }
 
 * {
@@ -34,6 +34,7 @@ p {
 
 nav {
     & a, input[type="submit"]  {
+        display: inline-block;
         color: white;
         font-size: 16px;
         text-decoration: none;
@@ -43,6 +44,27 @@ nav {
             color: theme("colors.brand.pink");
             text-decoration: none;
         }
+
+    }
+
+    & div[data-anchor] {
+        @apply w-max bg-brand-grey absolute top-[100%] -left-[50%] flex-col;
+
+        & a {
+            @apply text-black border-b border-b-white px-4 py-3;
+
+            &:last-child {
+                @apply border-b-0;
+            }
+
+            &:hover {
+                @apply bg-brand-purple text-white;
+            }
+        }
+    }
+
+    & div[data-nav-link] {
+        @apply relative h-full flex items-center;
     }
 }
 

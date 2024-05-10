@@ -2,7 +2,7 @@
 
 use App\UI\Layout;
 
-$layout = Layout::start("Sign In");
+$layout = Layout::start("Dashboard");
 ?>
 
 <?php
