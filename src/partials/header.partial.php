@@ -19,9 +19,9 @@ use Woodlands\Core\Auth;
     <link rel="stylesheet" href="/public/css/styles.css">
 
     <script src="/public/js/jquery.min.js"></script>
-    <script src="/public/js/index.js" defer></script>
     <script src="/public/js/uikit.min.js" defer></script>
     <script src="/public/js/uikit-icons.min.js" defer></script>
+    <script src="/public/js/index.js" defer></script>
 
     <title><?= $title ?? "Woodlands RMS" ?></title>
 </head>

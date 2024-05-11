@@ -31,6 +31,6 @@
 	"require": {
 		"ext-fileinfo": "*",
 		"trulyao/phlo": "^0.4.0",
-		"woodlands/core": "@dev"
+		"woodlands/core": "@dev",
 	}
 }

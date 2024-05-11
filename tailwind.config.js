@@ -1,9 +1,9 @@
 import preset from "franken-ui/shadcn-ui/preset";
 import variables from "franken-ui/shadcn-ui/variables";
 import ui from "franken-ui";
-// import hooks from "franken-ui/shadcn-ui/hooks";
+import hooks from "franken-ui/shadcn-ui/hooks";
 
-// const shadcn = hooks()
+const shadcn = hooks()
 
 
 /** @type {import('tailwindcss').Config} */
@@ -56,8 +56,11 @@ export default {
           hooks: {},
           media: true
         },
+        icon: {
+          hooks: {}
+        },
         notification: {
-          hooks: {},
+          hooks: shadcn.notification,
           media: true
         },
         tooltip: {

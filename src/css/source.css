@@ -80,6 +80,14 @@ nav {
     }
 }
 
+.input-group {
+    @apply flex flex-col mb-4;
+
+    & label {
+        @apply text-gray-400 text-sm mb-1;
+    }
+}
+
 .uk-button-primary {
     background-color: var(--color-primary-blue);
     color: white;
@@ -107,4 +115,8 @@ nav {
 
 .uk-toggle-switch {
     scale: 0.75;
+}
+
+button[data-image-picker-reset] {
+    @apply w-8 aspect-square items-center justify-center absolute top-0 right-0 bg-red-500 hover:bg-red-400 text-white text-sm transition-all hidden;
 }

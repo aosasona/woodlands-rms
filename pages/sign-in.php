@@ -1,34 +1,21 @@
 <?php
 
+
+
+use App\State;
+use App\Controllers\AuthController;
 use Phlo\Core\Context;
 use App\UI\Layout;
 use Woodlands\Core\Auth;
-use Woodlands\Core\Models\Enums\UserType;
-use Woodlands\Core\Exceptions\AppException;
 
 /** @var Context $ctx **/
-
 if(Auth::isLoggedIn()) {
     $ctx->redirect("/");
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $email = $ctx->bodyOr("email", "");
-        $password = $ctx->bodyOr("password", "");
-        $remember_me = $ctx->bodyOr("remember_me", "") == "on";
-
-        $user = Auth::login($email, $password, $remember_me, [UserType::Staff]);
-        $ctx->redirect("/");
-    } catch (Exception $e) {
-        $message = $e instanceof AppException ? $e->getMessage() : "An error occurred";
-        $_SESSION["signin.error"] =  $message;
-        $ctx->redirect("/sign-in");
-    }
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    AuthController::login($ctx);
 }
-
-$err = $_SESSION["signin.error"] ?? null;
-unset($_SESSION["signin.error"]);
 
 $layout = Layout::start("Sign In");
 ?>
@@ -39,12 +26,7 @@ $layout = Layout::start("Sign In");
     <form method="post" class="flex flex-col gap-y-4">
         <h1 class="text-3xl font-bold">Sign In</h1>
 
-      <?php if($err): ?>
-        <div class="uk-alert-danger" uk-alert>
-          <a class="uk-alert-close" uk-close></a>
-          <p><?= $err ?></p>
-        </div>
-      <?php endif; ?>
+        <?php State::renderError("signin") ?>
 
         <input class="uk-input" type="text" name="email" placeholder="E-mail address" aria-label="E-mail address" required />
 

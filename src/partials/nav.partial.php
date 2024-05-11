@@ -16,7 +16,7 @@ $email = $user?->email ?? "unknown";
 
       <div data-anchor="records" class="hidden">
         <a href="/students">Student records</a>
-        <a href="/staffs">Staff records</a>
+        <a href="/staff">Staff records</a>
       </div>
     </div>
 
