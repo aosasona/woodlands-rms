@@ -4,7 +4,11 @@ use Woodlands\Core\Models\Staff;
 
 $page = filter_input(INPUT_GET, "page", FILTER_VALIDATE_INT) ?? 1;
 $limit = 50;
-$staff = Staff::new()->where("staff_id", "!=", "NULL")->paginate(page: $page, perPage: $limit)->all();
+$staff = Staff::new()
+  ->where("staff_id", "!=", "NULL")
+  ->paginate(page: $page, perPage: $limit)
+  ->withRelations("user", "department")
+  ->all();
 
 $layout = Layout::start("Staff records");
 ?>
@@ -29,6 +33,7 @@ $layout = Layout::start("Staff records");
       <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>E-mail address</th>
         <th>Hired on</th>
         <th>Department</th>
         <th>Created on</th>
@@ -41,8 +46,9 @@ $layout = Layout::start("Staff records");
       <tr>
         <td><?= $staff->id ?></td>
         <td><?= ucfirst("{$staff->firstName} {$staff->lastName}") ?></td>
+        <td><?= $staff?->user?->email ?? "<i>unknown</i>" ?></td>
         <td><?= $staff->hireDate->format("d/m/Y") ?></td>
-        <td><?= $staff->departmentId == null ? "<i>None</i>" : "I HAVE DEPARTMENT" ?></td>
+        <td><?= $staff->departmentId == null ? "<i>None</i>" : "" ?></td>
         <td><?= $staff->createdAt->format("d/m/Y H:i") ?></td>
         <td class="space-x-4">
           <a href="/staff/<?= $staff->id ?>">View</a>

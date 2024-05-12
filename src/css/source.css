@@ -117,6 +117,12 @@ nav {
     scale: 0.75;
 }
 
+.uk-subnav {
+    & .uk-active a {
+        @apply bg-brand-purple text-white px-3 pt-2 pb-1.5 rounded;
+    }
+}
+
 button[data-image-picker-reset] {
     @apply w-8 aspect-square items-center justify-center absolute top-0 right-0 bg-red-500 hover:bg-red-400 text-white text-sm transition-all hidden;
 }

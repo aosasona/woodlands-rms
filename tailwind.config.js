@@ -66,6 +66,9 @@ export default {
         tooltip: {
           hooks: {}
         },
+        tab: {
+          hooks: {}
+        },
       }
     })
   ],

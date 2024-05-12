@@ -9883,6 +9883,10 @@ button.uk-icon:not(:disabled){
   margin-left:-0.5rem
 }
 
+.mb-4{
+  margin-bottom:1rem
+}
+
 .mb-6{
   margin-bottom:1.5rem
 }
@@ -9893,6 +9897,10 @@ button.uk-icon:not(:disabled){
 
 .mt-4{
   margin-top:1rem
+}
+
+.mt-5{
+  margin-top:1.25rem
 }
 
 .mt-6{
@@ -10005,6 +10013,10 @@ button.uk-icon:not(:disabled){
   gap:1rem
 }
 
+.gap-5{
+  gap:1.25rem
+}
+
 .gap-6{
   gap:1.5rem
 }
@@ -10074,6 +10086,11 @@ button.uk-icon:not(:disabled){
 .text-3xl{
   font-size:1.875rem;
   line-height:2.25rem
+}
+
+.text-xl{
+  font-size:1.25rem;
+  line-height:1.75rem
 }
 
 .text-xs{
@@ -10264,6 +10281,29 @@ nav {
   scale: 0.75;
 }
 
+.uk-subnav {
+  & .uk-active a{
+    border-radius:0.25rem
+  }
+  & .uk-active a{
+    background-color:var(--color-primary-purple)
+  }
+  & .uk-active a{
+    padding-left:0.75rem;
+    padding-right:0.75rem
+  }
+  & .uk-active a{
+    padding-top:0.5rem
+  }
+  & .uk-active a{
+    padding-bottom:0.375rem
+  }
+  & .uk-active a{
+    --tw-text-opacity:1;
+    color:rgb(255 255 255 / var(--tw-text-opacity))
+  }
+}
+
 button[data-image-picker-reset]{
   position:absolute;
   top:0px;
@@ -10367,6 +10407,10 @@ button[data-image-picker-reset]:hover{
 @media (min-width: 1024px){
   .lg\:block{
     display:block
+  }
+
+  .lg\:w-4\/5{
+    width:80%
   }
 
   .lg\:w-4\/6{

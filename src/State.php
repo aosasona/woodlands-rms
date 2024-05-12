@@ -44,4 +44,9 @@ final class State
 
         return null;
     }
+
+    public static function curryPrevFormValue(string $key): callable
+    {
+        return fn (string $field) => self::prevFormValue($key, $field);
+    }
 }
