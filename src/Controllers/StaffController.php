@@ -4,9 +4,12 @@ namespace App\Controllers;
 
 use App\State;
 use App\StateType;
+use App\UploadType;
 use DateTime;
 use Phlo\Core\Context;
 use Woodlands\Core\Exceptions\AppException;
+use Woodlands\Core\Models\{User,Staff};
+use Woodlands\Core\Models\Enums\{Gender,UserType};
 use Rakit\Validation\Validator;
 
 final class StaffController
@@ -54,11 +57,39 @@ final class StaffController
                 throw new AppException("Hire date cannot be in the future");
             }
 
-            // TODO: Create the staff and user records
+            $department_id = (int) $_POST["department_id"] ?: null;
 
+            $staff = Staff::new();
+            $staff->firstName = htmlspecialchars($_POST["first_name"]);
+            $staff->lastName = htmlspecialchars($_POST["last_name"]);
+            $staff->role = $_POST["role"] ?? null;
+            $staff->departmentId = $department_id;
+            $staff->gender = Gender::tryFrom($_POST["gender"]);
+            $staff->dob = $dob;
+            $staff->hireDate = $hire_date;
+
+
+            $user = User::new();
+            $user->email = $staff->generateEmail(true);
+            if($user->where("email_address", "=", $user->email)->one() !== null) {
+                $user->email = $staff->generateEmail(withUniqueSuffix: true);
+            }
+            $user->setPassword($_POST["password"]);
+            $user->type = UserType::Staff;
+            $user->save();
+
+            $staff->userId = $user->id;
+            $staff->save();
+
+            $file_name = FileController::fileNameFor($user->id, pathinfo($_FILES["profile_image"]["name"], PATHINFO_EXTENSION), UploadType::ProfileImage);
+            FileController::saveFile($file_name, $_FILES["profile_image"]["tmp_name"], UploadType::ProfileImage);
 
             $ctx->redirect("/staff");
         } catch (\Exception $e) {
+            if (isset($_ENV["APP_ENV"]) && ($_ENV["APP_ENV"] === "development" || $_ENV["APP_ENV"] === "dev")) {
+                throw $e;
+            }
+
             $message = $e instanceof AppException ? $e->getMessage() : "An error occurred while processing your request";
             State::persist("new_staff", $message, StateType::Error);
             $ctx->redirect("/staff/new");
