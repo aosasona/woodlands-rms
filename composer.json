@@ -32,5 +32,6 @@
 		"ext-fileinfo": "*",
 		"trulyao/phlo": "^0.4.0",
 		"woodlands/core": "@dev",
+		"rakit/validation": "^1.4"
 	}
 }

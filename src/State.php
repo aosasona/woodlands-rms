@@ -13,16 +13,18 @@ final class State
 
     public static function persist(string $key, mixed $value, StateType $type): void
     {
-        $_SESSION[self::getKey($key, $type)] = $value;
+        $key = self::getKey($key, $type);
+        $_SESSION[$key] = $value;
     }
 
     public static function renderError(string $key): void
     {
+        $key = self::getKey($key, StateType::Error);
         if (isset($_SESSION[$key])) {
             echo <<<HTML
               <div class="uk-alert-danger" uk-alert>
                 <a class="uk-alert-close" uk-close></a>
-                <p><?= $_SESSION[$key] ?></p>
+                <p>$_SESSION[$key]</p>
               </div>
             HTML;
 
@@ -35,7 +37,9 @@ final class State
         $key = self::getKey($key, StateType::Form);
 
         if (isset($_SESSION[$key][$field])) {
-            return $_SESSION[$key][$field];
+            $value = $_SESSION[$key][$field];
+            unset($_SESSION[$key][$field]);
+            return $value;
         }
 
         return null;

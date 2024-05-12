@@ -23,6 +23,11 @@ $crumbs = array(
 );
 
 $departments = Department::new()->all();
+
+function prevValue(string $field)
+{
+    return State::prevFormValue("new_staff", $field);
+}
 ?>
 
 
@@ -31,7 +36,7 @@ $departments = Department::new()->all();
 
   <?php Breadcrumb::render($crumbs); ?>
 
-  <form method="POST" class="max-w-3xl 2xl:max-w-2xl mt-6">
+  <form method="POST" class="max-w-3xl 2xl:max-w-2xl mt-6" enctype="multipart/form-data">
     <?php State::renderError("new_staff") ?>
 
     <div class="w-full flex gap-6">
@@ -58,12 +63,12 @@ $departments = Department::new()->all();
         <div class="w-full grid grid-cols-2 gap-4">
           <div class="input-group">
             <label for="first_name">First name</label>
-            <input class="uk-input" type="text" id="first-name" name="first_name" placeholder="John" aria-label="First name" minlength="2" required />
+            <input class="uk-input" type="text" id="first-name" name="first_name" placeholder="John" aria-label="First name" minlength="2" value="<?= prevValue("first_name") ?>" required />
           </div>
 
           <div class="input-group">
             <label for="last_name">Last name</label>
-            <input class="uk-input" type="text" id="last-name" name="last_name" placeholder="Doe" aria-label="Last name" minlength="2" required />
+            <input class="uk-input" type="text" id="last-name" name="last_name" placeholder="Doe" aria-label="Last name" minlength="2" value="<?= prevValue("last_name") ?>" required />
           </div>
         </div>
 
@@ -83,26 +88,28 @@ $departments = Department::new()->all();
           <label>Gender</label>
           <div class="space-x-4">
             <?php foreach(Gender::cases() as $gender): ?>
-            <label class="!text-black"><input class="uk-radio" type="radio" name="gender" value="<?= $gender->value ?>" required /> <?= $gender->name ?></label>
+              <label class="!text-black">
+                <input class="uk-radio" type="radio" name="gender" value="<?= $gender->value ?>" <?php (prevValue('gender') == $gender->value) ? "checked=\"checked\"" : "" ?> required /> <?= $gender->name ?>
+              </label>
             <?php endforeach; ?>
           </div>
         </div>
 
         <div class="input-group">
           <label for="role">Role</label>
-          <input class="uk-input" type="text" id="role" name="role" placeholder="e.g Head of department" aria-label="Role" />
+          <input class="uk-input" type="text" id="role" name="role" placeholder="e.g Head of department" value="<?= prevValue("role") ?>" aria-label="Role" />
         </div>
 
         <!-- Date of birth -->
         <div class="input-group">
           <label for="dob">Date of birth</label>
-          <input type="date" name="dob" class="uk-input" placeholder="Date of birth" required />
+          <input type="date" name="dob" class="uk-input" placeholder="Date of birth" value="<?= prevValue("dob") ?>" required />
         </div>
 
         <!-- Hire date -->
         <div class="input-group">
           <label for="hired-on">Hired on</label>
-          <input type="date" name="hire_date" class="uk-input" placeholder="Hire date" required />
+          <input type="date" name="hire_date" class="uk-input" placeholder="Hire date" value="<?= prevValue("hire_date") ?>" required />
         </div>
 
         <div class="input-group">
