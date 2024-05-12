@@ -60,9 +60,9 @@ final class StaffController
             $department_id = (int) $_POST["department_id"] ?: null;
 
             $staff = Staff::new();
-            $staff->firstName = htmlspecialchars($_POST["first_name"]);
-            $staff->lastName = htmlspecialchars($_POST["last_name"]);
-            $staff->role = $_POST["role"] ?? null;
+            $staff->firstName = strtolower(htmlspecialchars($_POST["first_name"]));
+            $staff->lastName = strtolower(htmlspecialchars($_POST["last_name"]));
+            $staff->role = strtolower($_POST["role"]) ?? null;
             $staff->departmentId = $department_id;
             $staff->gender = Gender::tryFrom($_POST["gender"]);
             $staff->dob = $dob;

@@ -20,9 +20,9 @@ export default {
         screens: {
           sm: "100%",
           md: "90%",
-          lg: "848px",
-          xl: "848px",
-          "2xl": "848px",
+          lg: "1080px",
+          xl: "1200px",
+          "2xl": "1280px",
         },
       },
       colors: {

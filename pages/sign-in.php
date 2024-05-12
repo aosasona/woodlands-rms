@@ -42,7 +42,7 @@ $layout = Layout::start("Sign In");
         </div>
 
       <div class="flex w-full justify-end mt-6">
-        <button class="uk-button" type="submit">Sign In</button>
+        <button class="uk-button uk-button-primary" type="submit">Sign In</button>
       </div>
     </form>
   </div>

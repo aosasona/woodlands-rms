@@ -120,3 +120,37 @@ nav {
 button[data-image-picker-reset] {
     @apply w-8 aspect-square items-center justify-center absolute top-0 right-0 bg-red-500 hover:bg-red-400 text-white text-sm transition-all hidden;
 }
+
+.records {
+    & thead {
+        & tr {
+            @apply text-left text-sm font-normal bg-brand-grey text-black;
+
+            & th {
+                @apply px-4 py-3;
+            }
+        }
+    }
+
+    & tbody {
+        & tr {
+            @apply text-left text-sm font-normal border-b border-brand-grey;
+
+            &:last-child {
+                @apply border-b-0;
+            }
+
+            & td {
+                @apply px-4 py-3;
+
+                & i {
+                    @apply text-gray-400;
+                }
+            }
+        }
+    }
+
+    & a  {
+        @apply text-brand-blue hover:text-brand-purple;
+    }
+}
