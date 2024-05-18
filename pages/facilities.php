@@ -3,7 +3,7 @@
 use App\UI\{Breadcrumb, Layout};
 use Woodlands\Core\Models\{Department, Staff};
 
-$staff_members = Staff::new()->all();
+$staff_members = Staff::new()->where("staff_id", "!=", "NULL")->with("user")->all();
 
 $layout = Layout::start("Facilities");
 ?>

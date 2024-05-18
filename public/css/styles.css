@@ -9710,6 +9710,14 @@ video {
   background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Ccircle%20fill%3D%22%23fff%22%20cx%3D%228%22%20cy%3D%228%22%20r%3D%222%22%20%2F%3E%0A%3C%2Fsvg%3E")
 }
 
+.uk-checkbox:checked{
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23fff%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%20%2F%3E%0A%3C%2Fsvg%3E%0A")
+}
+
+.uk-checkbox:indeterminate{
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23fff%22%20x%3D%223%22%20y%3D%228%22%20width%3D%2210%22%20height%3D%221%22%20%2F%3E%0A%3C%2Fsvg%3E")
+}
+
 .uk-radio:disabled, .uk-checkbox:disabled{
   background-color:#f8f8f8;
   border-color:#e5e5e5
@@ -9717,6 +9725,14 @@ video {
 
 .uk-radio:disabled:checked{
   background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Ccircle%20fill%3D%22%23999%22%20cx%3D%228%22%20cy%3D%228%22%20r%3D%222%22%20%2F%3E%0A%3C%2Fsvg%3E")
+}
+
+.uk-checkbox:disabled:checked{
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23999%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%20%2F%3E%0A%3C%2Fsvg%3E%0A")
+}
+
+.uk-checkbox:disabled:indeterminate{
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23999%22%20x%3D%223%22%20y%3D%228%22%20width%3D%2210%22%20height%3D%221%22%20%2F%3E%0A%3C%2Fsvg%3E")
 }
 
 .uk-form-label{
@@ -9865,6 +9881,10 @@ button.uk-icon:not(:disabled){
   z-index:50
 }
 
+.m-0{
+  margin:0px
+}
+
 .mx-auto{
   margin-left:auto;
   margin-right:auto
@@ -9937,6 +9957,10 @@ button.uk-icon:not(:disabled){
 
 .h-20{
   height:5rem
+}
+
+.h-96{
+  height:24rem
 }
 
 .h-\[80vh\]{
@@ -10021,6 +10045,11 @@ button.uk-icon:not(:disabled){
   gap:1.5rem
 }
 
+.gap-x-2{
+  -moz-column-gap:0.5rem;
+       column-gap:0.5rem
+}
+
 .gap-x-40{
   -moz-column-gap:10rem;
        column-gap:10rem
@@ -10048,6 +10077,18 @@ button.uk-icon:not(:disabled){
   margin-bottom:calc(1rem * var(--tw-space-y-reverse))
 }
 
+.border{
+  border-width:1px
+}
+
+.border-t-0{
+  border-top-width:0px
+}
+
+.border-brand-grey{
+  border-color:var(--color-secondary-grey)
+}
+
 .bg-brand-pink{
   background-color:var(--color-primary-pink)
 }
@@ -10070,9 +10111,22 @@ button.uk-icon:not(:disabled){
   padding:1.25rem
 }
 
+.px-3{
+  padding-left:0.75rem;
+  padding-right:0.75rem
+}
+
 .px-8{
   padding-left:2rem;
   padding-right:2rem
+}
+
+.pb-1{
+  padding-bottom:0.25rem
+}
+
+.pt-2{
+  padding-top:0.5rem
 }
 
 .text-center{
@@ -10086,6 +10140,11 @@ button.uk-icon:not(:disabled){
 .text-3xl{
   font-size:1.875rem;
   line-height:2.25rem
+}
+
+.text-sm{
+  font-size:0.875rem;
+  line-height:1.25rem
 }
 
 .text-xl{
@@ -10113,6 +10172,14 @@ button.uk-icon:not(:disabled){
 .\!text-black{
   --tw-text-opacity:1 !important;
   color:rgb(0 0 0 / var(--tw-text-opacity)) !important
+}
+
+.text-brand-grey{
+  color:var(--color-secondary-grey)
+}
+
+.text-brand-notice{
+  color:var(--color-notice)
 }
 
 .text-gray-500{

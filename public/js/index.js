@@ -2,6 +2,7 @@ $(function () {
     handleNav();
     handleImagePicker();
     handlePasswordVisibilityToggle();
+    handleSearch()
 })
 
 function handleNav() {
@@ -27,6 +28,11 @@ function handleNav() {
 function handleImagePicker() {
     const picker = $("[data-image-picker]")
     const pickerId = picker.attr("id")
+
+    if (!picker.length) {
+        return;
+    }
+
     if (!pickerId) {
         console.error("Image picker element must have an id attribute")
         return;
@@ -103,5 +109,33 @@ function handlePasswordVisibilityToggle() {
             $(this).text("Show password");
             password.attr("type", "password");
         }
+    })
+}
+
+function handleSearch() {
+    const searchInput = $("[data-search-input]");
+    const searchTarget = searchInput.data("search-target");
+    const list = $(`#${searchTarget}`);
+
+    if (!list.length) {
+        console.error("Search target element not found");
+        return;
+    }
+
+    searchInput.on("input", function () {
+        const query = $(this).val().toLowerCase();
+
+        if (!query.length) return list.children().show();
+
+        list.children().each(function () {
+            const searchableItems = $(this).find("[data-searchable]");
+            if (!searchableItems.length) return;
+
+            const itemContainsQuery = searchableItems.filter(function () {
+                return $(this).text().toLowerCase().includes(query);
+            }).length > 0;
+
+            return itemContainsQuery ? $(this).show() : $(this).hide();
+        });
     })
 }

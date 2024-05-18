@@ -31,11 +31,39 @@ $prevValue = State::curryPrevFormValue("new_department");
         </select>
       </div>
 
+      <div class="input-group">
+        <label for="description">Description</label>
+        <textarea class="uk-textarea" id="description" name="description" placeholder="A brief description of the department" aria-label="Department description" rows="8" maxlength="8096" required><?= $prevValue("description") ?></textarea>
+      </div>
     </div>
 
-    <div class="input-group">
-      <label for="description">Description</label>
-      <textarea class="uk-textarea" id="description" name="description" placeholder="A brief description of the department" aria-label="Department description" rows="8" required><?= $prevValue("description") ?></textarea>
+    <div>
+      <h2 class="text-xl font-bold mb-4">Assign Staff</h2>
+      <input type="search" class="uk-input" placeholder="Search for staff" aria-label="Search for staff" data-search-input data-search-target="staff-list" />
+      <div class="h-96 border border-t-0 border-brand-grey">
+        <ul class="uk-list uk-list-divider uk-overflow-auto" id="staff-list">
+          <?php foreach ($staff_members as $staff) : ?>
+          <li class="flex justify-between items-center px-3 pt-2 pb-1 m-0 select-none">
+            <div class="space-x-2">
+              <input type="checkbox" class="uk-checkbox" name="assigned[]" value="<?= $staff->id ?>" />
+
+              <span data-searchable>
+                <?= ucfirst("{$staff->firstName} {$staff->lastName} ({$staff->id})") ?>
+              </span>
+
+            </div>
+
+            <div class="flex items-center gap-x-2">
+              <p class="text-xs text-gray-500" data-searchable><?= $staff->user->email ?></p>
+              <?php if (!empty($staff->departmentId)) : ?>
+                <div uk-tooltip="title: This staff is already assigned to a department; pos: top-right" class="text-xs text-brand-grey">
+                  <span uk-icon="warning" class="text-brand-notice text-sm"></span>
+                </div>
+              <?php endif; ?>
+            </div>
+          </li>
+          <?php endforeach; ?>
+      </div>
     </div>
 
   </div>

@@ -555,7 +555,7 @@
             "dist": {
                 "type": "path",
                 "url": "./core",
-                "reference": "a439e1caccc0c30cd737f63288d06d9f46ec6140"
+                "reference": "b9282b9f22cf7e8868c5b8747f64d7fab800f81b"
             },
             "require": {
                 "php": "^8.1",
