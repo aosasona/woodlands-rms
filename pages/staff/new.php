@@ -14,7 +14,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
 }
 
-$layout = Layout::start("Staff records");
 
 $crumbs = array(
   Breadcrumb::crumb(name: "Records", disabled: true),
@@ -28,6 +27,8 @@ function prevValue(string $field)
 {
     return State::prevFormValue("new_staff", $field);
 }
+
+$layout = Layout::start("Staff records");
 ?>
 
 

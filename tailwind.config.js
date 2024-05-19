@@ -3,8 +3,7 @@ import variables from "franken-ui/shadcn-ui/variables";
 import ui from "franken-ui";
 import hooks from "franken-ui/shadcn-ui/hooks";
 
-const shadcn = hooks()
-
+const shadcn = hooks();
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -20,22 +19,22 @@ export default {
         screens: {
           sm: "100%",
           md: "90%",
-          lg: "1080px",
-          xl: "1200px",
+          lg: "968px",
+          xl: "968px",
           "2xl": "1280px",
         },
       },
       colors: {
         brand: {
-          "blue": "var(--color-primary-blue)",
-          "purple": "var(--color-primary-purple)",
-          "pink": "var(--color-primary-pink)",
-          "grey": "var(--color-secondary-grey)",
-          "success": "var(--color-success)",
-          "notice": "var(--color-notice)",
-          "error": "var(--color-error)",
-        }
-      }
+          blue: "var(--color-primary-blue)",
+          purple: "var(--color-primary-purple)",
+          pink: "var(--color-primary-pink)",
+          grey: "var(--color-secondary-grey)",
+          success: "var(--color-success)",
+          notice: "var(--color-notice)",
+          error: "var(--color-error)",
+        },
+      },
     },
   },
   presets: [preset],
@@ -44,33 +43,32 @@ export default {
     ui({
       components: {
         button: {
-          hooks: {}
+          hooks: {},
         },
         breadcrumb: {
-          hooks: {}
+          hooks: {},
         },
-        'form-range': {
-          hooks: {}
+        "form-range": {
+          hooks: {},
         },
         form: {
           hooks: {},
-          media: true
+          media: true,
         },
         icon: {
-          hooks: {}
+          hooks: {},
         },
         notification: {
           hooks: shadcn.notification,
-          media: true
+          media: true,
         },
         tooltip: {
-          hooks: {}
+          hooks: {},
         },
         tab: {
-          hooks: {}
+          hooks: {},
         },
-      }
-    })
+      },
+    }),
   ],
-}
-
+};

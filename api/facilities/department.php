@@ -70,8 +70,6 @@ function post(Context $ctx): never
 
         $ctx->redirect("/facilities");
     } catch (Exception $e) {
-        var_dump($e->getMessage());
-        exit;
         ExceptionHandler::handle(
             context: $ctx,
             exception: $e,

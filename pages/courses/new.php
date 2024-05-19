@@ -5,7 +5,7 @@ use Phlo\Extensions\CSRFToken;
 
 use App\State;
 use App\UI\{Breadcrumb, Layout};
-use Woodlands\Core\Models\{Department, Student};
+use Woodlands\Core\Models\{Department, Staff, Student};
 
 $layout = Layout::start("New course");
 
@@ -15,7 +15,9 @@ $breadcrumbs = [
     Breadcrumb::crumb(name: "Create new course", path: "/courses/new", disabled: true),
   ];
 
+$prevValue = State::curryPrevFormValue("new_course");
 $departments = Department::new()->all();
+$staff_members = Staff::new()->literalWhere("`staff_id` IS NOT NULL")->with("user")->all();
 ?>
 
 
@@ -32,25 +34,25 @@ $departments = Department::new()->all();
     <?= CSRFToken::input(field_name: "__csrf_token") ?>
 
     <input type="hidden" name="action" value="create_course" id="courseFormAction" />
-    <div class="input-group">
-      <label for="name">Course name</label>
-      <input class="uk-input" type="text" id="name" name="name" placeholder="Course name" aria-label="Course name" required />
-    </div>
 
-    <div class="input-group">
-      <label for="department">Department</label>
-      <select name="department" id="department" class="uk-select">
-        <option></option>
-        <?php foreach ($departments as $department) : ?>
-        <option value="<?= $department->id ?>"><?= ucfirst($department->name) ?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
 
-    <div class="input-group">
-      <label for="description">Description</label>
-      <textarea class="uk-textarea" rows="10" id="description" name="description" placeholder="Course description" aria-label="Course description"></textarea>
-    </div>
+    <ul class="uk-subnav uk-subnav-primary mt-4" uk-switcher>
+        <li><a href="#">Details</a></li>
+        <li><a href="#">Tutors</a></li>
+        <li><a href="#">Students</a></li>
+        <li><a href="#">Modules</a></li>
+    </ul>
+
+
+    <ul class="uk-switcher mt-5">
+        <li><?php require_once __DIR__ ."/../../src/partials/courses/details.partial.php" ?></li>
+        <li><?php require_once __DIR__ ."/../../src/partials/courses/tutors.partial.php" ?></li>
+        <li><?php require_once __DIR__ ."/../../src/partials/courses/students.partial.php" ?></li>
+        <li></li>
+    </ul>
+
+    <button type="submit" class="uk-button uk-button-primary mt-8">Save</button>
+
   </form>
 
 </main>

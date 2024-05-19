@@ -86,10 +86,6 @@ final class StaffController
 
             $ctx->redirect("/staff");
         } catch (\Exception $e) {
-            if (isset($_ENV["APP_ENV"]) && ($_ENV["APP_ENV"] === "development" || $_ENV["APP_ENV"] === "dev")) {
-                throw $e;
-            }
-
             $message = $e instanceof AppException ? $e->getMessage() : "An error occurred while processing your request";
             State::persist("new_staff", $message, StateType::Error);
             $ctx->redirect("/staff/new");

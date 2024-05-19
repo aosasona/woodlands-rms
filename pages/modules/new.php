@@ -27,6 +27,8 @@ $breadcrumbs = [
       <label for="description">Description</label>
       <textarea class="uk-textarea" rows="10" id="description" name="description" placeholder="Module description" aria-label="Module description"></textarea>
     </div>
+
+    <button type="submit" class="uk-button uk-button-primary mt-8">Save</button>
   </form>
 
 </main>

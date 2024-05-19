@@ -33,7 +33,7 @@ $prevValue = State::curryPrevFormValue("new_department");
         <select name="head" id="head" class="uk-select">
           <option></option>
           <?php foreach ($staff_members as $department) : ?>
-          <option value="<?= $department->id ?>" <?= $department->id == $prevValue("head") ? "selected" : "" ?>><?= ucfirst("{$department->firstName} {$department->lastName} ({$department->user->email})") ?></option>
+          <option value="<?= $department->id ?>" <?= $department->id == $prevValue("head") ? "selected" : "" ?>><?= ucwords("{$department->firstName} {$department->lastName} ({$department->user->email})") ?></option>
           <?php endforeach; ?>
         </select>
       </div>
@@ -55,7 +55,7 @@ $prevValue = State::curryPrevFormValue("new_department");
               <input type="checkbox" class="uk-checkbox" name="assigned[]" value="<?= $department->id ?>" />
 
               <span data-searchable>
-                <?= ucfirst("{$department->firstName} {$department->lastName} ({$department->id})") ?>
+                <?= ucwords("{$department->firstName} {$department->lastName} ({$department->id})") ?>
               </span>
 
             </div>
@@ -93,7 +93,7 @@ $prevValue = State::curryPrevFormValue("new_department");
       <?php foreach ($departments as $department): ?>
       <tr>
         <td data-department-id="<?= $department->id ?>"><?= $department->id ?></td>
-        <td data-department-name="<?= $department->id ?>"><?= ucfirst($department->name) ?></td>
+        <td data-department-name="<?= $department->id ?>"><?= ucwords($department->name) ?></td>
         <td><?= $department->createdAt->format("d/m/Y H:i") ?></td>
         <td class="space-x-4">
           <a href="/staff?department=<?= $department->id ?>">View all staff</a>
@@ -104,10 +104,10 @@ $prevValue = State::curryPrevFormValue("new_department");
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
               <div class="uk-modal-header">
-                <h2 class="uk-modal-title"><?= ucfirst($department->name) ?></h2>
+                <h2 class="uk-modal-title"><?= ucwords($department->name) ?></h2>
               </div>
               <div class="uk-modal-body max-h-96 overflow-y-auto">
-                <p data-department-description="<?= $department->id ?>"><?= ucfirst($department->description) ?></p>
+                <p data-department-description="<?= $department->id ?>"><?= ucwords($department->description) ?></p>
               </div>
               <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>

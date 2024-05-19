@@ -51,10 +51,10 @@ $layout = Layout::start("Staff records");
       <?php foreach ($staff_members as $staff): ?>
       <tr>
         <td><?= $staff->id ?></td>
-        <td><?= ucfirst("{$staff->firstName} {$staff->lastName}") ?></td>
+        <td><?= ucwords("{$staff->firstName} {$staff->lastName}") ?></td>
         <td><?= $staff?->user?->email ?? "<i>unknown</i>" ?></td>
         <td><?= $staff->hireDate->format("d/m/Y") ?></td>
-        <td><?= $staff->departmentId == null ? "<i>None</i>" : "<a href='/staff?department=$staff->departmentId'>".ucfirst($staff->department->name)."</a>" ?></td>
+        <td><?= $staff->departmentId == null ? "<i>None</i>" : "<a href='/staff?department=$staff->departmentId'>".ucwords($staff->department->name)."</a>" ?></td>
         <td><?= $staff->createdAt->format("d/m/Y H:i") ?></td>
         <td class="space-x-4">
           <a href="/staff/<?= $staff->id ?>">View</a>
