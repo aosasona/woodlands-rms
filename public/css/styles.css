@@ -9915,6 +9915,10 @@ button.uk-icon:not(:disabled){
   grid-column:span 4 / span 4
 }
 
+.col-span-5{
+  grid-column:span 5 / span 5
+}
+
 .col-span-8{
   grid-column:span 8 / span 8
 }
@@ -9943,6 +9947,10 @@ button.uk-icon:not(:disabled){
 
 .-mt-3{
   margin-top:-0.75rem
+}
+
+.-mt-6{
+  margin-top:-1.5rem
 }
 
 .mb-4{
@@ -10031,6 +10039,10 @@ button.uk-icon:not(:disabled){
 
 .w-40{
   width:10rem
+}
+
+.w-5\/6{
+  width:83.333333%
 }
 
 .w-full{

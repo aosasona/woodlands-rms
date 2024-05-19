@@ -5,7 +5,7 @@
  * @var \callable $prevValue
  */
 
-$prevModules = $prevValue("modules") ?? [];
+$prev_modules = $prevValue("modules") ?? [];
 ?>
 <div>
   <h2 class="text-xl font-bold mb-4">Add Modules</h2>
@@ -14,12 +14,10 @@ $prevModules = $prevValue("modules") ?? [];
     <ul class="uk-list uk-list-divider uk-overflow-auto" id="modules-list">
       <?php foreach ($modules as $module) : ?>
         <li class="flex justify-between items-center px-3 pt-2 pb-1 m-0 select-none" data-module-id="<?= $module->id ?>">
-          <div class="space-x-2">
-            <input type="checkbox" class="uk-checkbox" name="modules[]" value="<?= $module->id ?>" <?= in_array($module->id, $prevModules) ? "selected='selected'" : "" ?> />
-
-            <span data-searchable>
-              <?= strtoupper($module->code) . " - " . ucwords("{$module->name}") ?>
-            </span>
+          <label for="module_<?= $module->id ?>" class="space-x-2">
+            <input type="checkbox" class="uk-checkbox" name="modules[]" id="module_<?= $module->id ?>" value="<?= $module->id ?>" <?= in_array((string) $module->id, $prev_modules) ? "selected='selected'" : "" ?> />
+            <span data-searchable><?= strtoupper($module->code) . " - " . ucwords("{$module->name}") ?></span>
+          </label>
         </li>
       <?php endforeach; ?>
   </div>

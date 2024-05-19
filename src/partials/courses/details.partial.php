@@ -16,18 +16,14 @@
   <select name="department" id="course-department" class="uk-select">
     <option></option>
     <?php foreach ($departments as $department) : ?>
-      <option value="<?= $department->id ?>"><?= ucfirst($department->name) ?></option>
+      <option value="<?= $department->id ?>" <?= $prevValue('department') == $department->id ? "selected" : "" ?>><?= ucwords($department->name) ?></option>
     <?php endforeach; ?>
   </select>
 </div>
-<div class="grid grid-cols-2 gap-x-4">
-  <div class="input-group">
-    <label for="course-start-date">Start date</label>
-    <input class="uk-input" type="date" id="course-start-date" name="start_date" placeholder="Course start date" aria-label="Course start date" value="<?= $prevValue('start-date') ?>" required />
-  </div>
-  <div class="input-group">
-    <label for="end_date">End date</label> <input class="uk-input" type="date" id="end_date" name="end_date" placeholder="Course end date" aria-label="Course end date" value="<?= $prevValue('end_date') ?>" required />
-  </div>
+
+<div class="grid grid-cols-2 gap-x-4 input-group">
+  <label for="course-start-date">Start date</label>
+  <input class="uk-input" type="date" id="course-start-date" name="start_date" placeholder="Course start date" aria-label="Course start date" value="<?= $prevValue('start_date') ?>" required />
 </div>
 
 <div class="input-group">
