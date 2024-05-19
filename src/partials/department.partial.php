@@ -15,7 +15,7 @@ $prevValue = State::curryPrevFormValue("new_department");
 
   <?php State::renderError("new_department") ?>
 
-  <?= CSRFToken::input(field_name: "__csrf_token") ?>
+  <?= CSRFToken::input(field_name: CSRFToken::DEFAULT_FIELD_NAME) ?>
 
   <input type="hidden" name="action" value="create_department" id="departmentFormAction" />
   <input type="hidden" name="department_id" value="" id="departmentFormHead" />
@@ -33,7 +33,7 @@ $prevValue = State::curryPrevFormValue("new_department");
         <select name="head" id="head" class="uk-select">
           <option></option>
           <?php foreach ($staff_members as $department) : ?>
-          <option value="<?= $department->id ?>" <?= $department->id == $prevValue("head") ? "selected" : "" ?>><?= ucwords("{$department->firstName} {$department->lastName} ({$department->user->email})") ?></option>
+            <option value="<?= $department->id ?>" <?= $department->id == $prevValue("head") ? "selected" : "" ?>><?= ucwords("{$department->firstName} {$department->lastName} ({$department->user->email})") ?></option>
           <?php endforeach; ?>
         </select>
       </div>
@@ -50,25 +50,25 @@ $prevValue = State::curryPrevFormValue("new_department");
       <div class="h-96 border border-t-0 border-brand-grey">
         <ul class="uk-list uk-list-divider uk-overflow-auto" id="staff-list">
           <?php foreach ($staff_members as $department) : ?>
-          <li class="flex justify-between items-center px-3 pt-2 pb-1 m-0 select-none" data-staff-id="<?= $department->id ?>">
-            <div class="space-x-2">
-              <input type="checkbox" class="uk-checkbox" name="assigned[]" value="<?= $department->id ?>" />
+            <li class="flex justify-between items-center px-3 pt-2 pb-1 m-0 select-none" data-staff-id="<?= $department->id ?>">
+              <div class="space-x-2">
+                <input type="checkbox" class="uk-checkbox" name="assigned[]" value="<?= $department->id ?>" />
 
-              <span data-searchable>
-                <?= ucwords("{$department->firstName} {$department->lastName} ({$department->id})") ?>
-              </span>
+                <span data-searchable>
+                  <?= ucwords("{$department->firstName} {$department->lastName} ({$department->id})") ?>
+                </span>
 
-            </div>
+              </div>
 
-            <div class="flex items-center gap-x-2">
-              <p class="text-xs text-gray-500" data-searchable><?= $department->user->email ?></p>
-              <?php if (!empty($department->departmentId)) : ?>
-                <div uk-tooltip="title: This staff is already assigned to a department; pos: top-right" class="text-xs text-brand-grey">
-                  <span uk-icon="warning" class="text-brand-notice text-sm"></span>
-                </div>
-              <?php endif; ?>
-            </div>
-          </li>
+              <div class="flex items-center gap-x-2">
+                <p class="text-xs text-gray-500" data-searchable><?= $department->user->email ?></p>
+                <?php if (!empty($department->departmentId)) : ?>
+                  <div uk-tooltip="title: This staff is already assigned to a department; pos: top-right" class="text-xs text-brand-grey">
+                    <span uk-icon="warning" class="text-brand-notice text-sm"></span>
+                  </div>
+                <?php endif; ?>
+              </div>
+            </li>
           <?php endforeach; ?>
       </div>
     </div>
@@ -85,38 +85,45 @@ $prevValue = State::curryPrevFormValue("new_department");
         <th>ID</th>
         <th>Name</th>
         <th>Created on</th>
+        <th>Related</th>
         <th>Actions</th>
       </tr>
     </thead>
 
     <tbody>
-      <?php foreach ($departments as $department): ?>
-      <tr>
-        <td data-department-id="<?= $department->id ?>"><?= $department->id ?></td>
-        <td data-department-name="<?= $department->id ?>"><?= ucwords($department->name) ?></td>
-        <td><?= $department->createdAt->format("d/m/Y H:i") ?></td>
-        <td class="space-x-4">
-          <a href="/staff?department=<?= $department->id ?>">View all staff</a>
-          <a href="#" uk-toggle="target: #<?= 'dept-desc-'.$department->id ?>">Show full description</a>
-          <a href="#" onclick="javascript:void(0)" data-edit-department="<?= $department->id ?>">Edit</a>
+      <?php foreach ($departments as $department) : ?>
+        <tr>
+          <td data-department-id="<?= $department->id ?>"><?= $department->id ?></td>
+          <td data-department-name="<?= $department->id ?>"><?= ucwords($department->name) ?></td>
+          <td><?= $department->createdAt->format("d/m/Y H:i") ?></td>
+          <td class="space-x-4">
+            <a href="/staff?filters=department:<?= $department->id ?>">Staff</a>
+            <a href="/students?filters=department:<?= $department->id ?>">Students</a>
+          </td>
+          <td class="space-x-4">
+            <a href="#" uk-toggle="target: #<?= 'dept-desc-' . $department->id ?>">View description</a>
+            <a href="#" onclick="javascript:void(0)" data-edit-department="<?= $department->id ?>">Edit</a>
 
-          <div id="<?= 'dept-desc-'.$department->id ?>" uk-modal>
-            <div class="uk-modal-dialog">
-              <button class="uk-modal-close-default" type="button" uk-close></button>
-              <div class="uk-modal-header">
-                <h2 class="uk-modal-title"><?= ucwords($department->name) ?></h2>
-              </div>
-              <div class="uk-modal-body max-h-96 overflow-y-auto">
-                <p data-department-description="<?= $department->id ?>"><?= ucwords($department->description) ?></p>
-              </div>
-              <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+            <?php $deletion_csrf = CSRFToken::set("__delete_dep_csrf"); ?>
+            <a href="/api/facilities/department?delete=<?= $department->id ?>&csrf_token=<?= $deletion_csrf ?>" class="!text-brand-error" data-confirm="Are you sure you want to delete the <?= $department->name ?> department?">Delete</a>
+
+            <div id="<?= 'dept-desc-' . $department->id ?>" uk-modal>
+              <div class="uk-modal-dialog">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <div class="uk-modal-header">
+                  <h2 class="uk-modal-title"><?= ucwords($department->name) ?></h2>
+                </div>
+                <div class="uk-modal-body max-h-96 overflow-y-auto">
+                  <p data-department-description="<?= $department->id ?>"><?= ucfirst(nl2br($department->description)) ?></p>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                  <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+                </div>
               </div>
             </div>
-          </div>
-        </td>
+          </td>
 
-      </tr>
+        </tr>
       <?php endforeach; ?>
     </tbody>
   </table>

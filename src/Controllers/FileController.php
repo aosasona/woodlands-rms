@@ -25,7 +25,7 @@ final class FileController
         };
 
         self::createDirIfNotExists($dir);
-        $destination = $dir. "/$filename";
+        $destination = $dir . "/$filename";
 
         if (!move_uploaded_file($tmpName, $destination)) {
             throw new AppException("Failed to save file");
@@ -46,6 +46,4 @@ final class FileController
             UploadType::ProfileImage => "pp_$userId.$extension",
         };
     }
-
-
 }

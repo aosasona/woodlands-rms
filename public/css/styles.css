@@ -9903,6 +9903,14 @@ button.uk-icon:not(:disabled){
   z-index:50
 }
 
+.col-span-2{
+  grid-column:span 2 / span 2
+}
+
+.col-span-3{
+  grid-column:span 3 / span 3
+}
+
 .col-span-4{
   grid-column:span 4 / span 4
 }
@@ -9933,6 +9941,10 @@ button.uk-icon:not(:disabled){
   margin-left:-0.5rem
 }
 
+.-mt-3{
+  margin-top:-0.75rem
+}
+
 .mb-4{
   margin-bottom:1rem
 }
@@ -9943,6 +9955,10 @@ button.uk-icon:not(:disabled){
 
 .mt-2{
   margin-top:0.5rem
+}
+
+.mt-24{
+  margin-top:6rem
 }
 
 .mt-4{
@@ -9959,6 +9975,10 @@ button.uk-icon:not(:disabled){
 
 .mt-8{
   margin-top:2rem
+}
+
+.block{
+  display:block
 }
 
 .flex{
@@ -10049,6 +10069,10 @@ button.uk-icon:not(:disabled){
 
 .grid-cols-2{
   grid-template-columns:repeat(2, minmax(0, 1fr))
+}
+
+.grid-cols-9{
+  grid-template-columns:repeat(9, minmax(0, 1fr))
 }
 
 .flex-col{
@@ -10154,6 +10178,10 @@ button.uk-icon:not(:disabled){
      object-fit:cover
 }
 
+.p-0{
+  padding:0px
+}
+
 .p-5{
   padding:1.25rem
 }
@@ -10166,6 +10194,11 @@ button.uk-icon:not(:disabled){
 .px-8{
   padding-left:2rem;
   padding-right:2rem
+}
+
+.py-4{
+  padding-top:1rem;
+  padding-bottom:1rem
 }
 
 .pb-1{
@@ -10221,6 +10254,10 @@ button.uk-icon:not(:disabled){
   color:rgb(0 0 0 / var(--tw-text-opacity)) !important
 }
 
+.\!text-brand-error{
+  color:var(--color-error) !important
+}
+
 .text-brand-grey{
   color:var(--color-secondary-grey)
 }
@@ -10232,6 +10269,11 @@ button.uk-icon:not(:disabled){
 .text-gray-500{
   --tw-text-opacity:1;
   color:rgb(107 114 128 / var(--tw-text-opacity))
+}
+
+.text-white{
+  --tw-text-opacity:1;
+  color:rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 :root {

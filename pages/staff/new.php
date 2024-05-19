@@ -1,34 +1,33 @@
 <?php
 
-
-
 use App\Controllers\StaffController;
 use App\State;
-use App\UI\{Breadcrumb, Layout};
+use App\UI\Breadcrumb;
+use App\UI\Layout;
+use Phlo\Extensions\CSRFToken;
 use Woodlands\Core\Models\Department;
 use Woodlands\Core\Models\Enums\Gender;
 
-/** @var Context $ctx **/
-if($_SERVER["REQUEST_METHOD"] === "POST") {
-    StaffController::create($ctx);
-    exit;
+/** @var Phlo\Core\Context $ctx * */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  StaffController::create($ctx);
+  exit;
 }
 
-
-$crumbs = array(
-  Breadcrumb::crumb(name: "Records", disabled: true),
-  Breadcrumb::crumb(name: "Staff", path: "/staff"),
-  Breadcrumb::crumb(name: "Add a new staff", path: "/staff/new", disabled: true)
-);
+$crumbs = [
+  Breadcrumb::crumb(name: 'Records', disabled: true),
+  Breadcrumb::crumb(name: 'Staff', path: '/staff'),
+  Breadcrumb::crumb(name: 'Add a new staff', path: '/staff/new', disabled: true),
+];
 
 $departments = Department::new()->all();
 
 function prevValue(string $field)
 {
-    return State::prevFormValue("new_staff", $field);
+  return State::prevFormValue('new_staff', $field);
 }
 
-$layout = Layout::start("Staff records");
+$layout = Layout::start('Staff records');
 ?>
 
 
@@ -38,9 +37,10 @@ $layout = Layout::start("Staff records");
   <?php Breadcrumb::render($crumbs); ?>
 
   <form method="POST" class="max-w-3xl 2xl:max-w-2xl mt-6" enctype="multipart/form-data">
-    <?php State::renderError("new_staff") ?>
+    <?php State::renderError('new_staff') ?>
 
     <div class="w-full flex gap-6">
+      <?= CSRFToken::input(field_name: CSRFToken::DEFAULT_FIELD_NAME) ?>
 
       <!-- Profile image -->
       <div class="mb-6">
@@ -64,12 +64,12 @@ $layout = Layout::start("Staff records");
         <div class="w-full grid grid-cols-2 gap-4">
           <div class="input-group">
             <label for="first_name">First name</label>
-            <input class="uk-input" type="text" id="first-name" name="first_name" placeholder="John" aria-label="First name" minlength="2" value="<?= prevValue("first_name") ?>" required />
+            <input class="uk-input" type="text" id="first-name" name="first_name" placeholder="John" aria-label="First name" minlength="2" value="<?= prevValue('first_name') ?>" required />
           </div>
 
           <div class="input-group">
             <label for="last_name">Last name</label>
-            <input class="uk-input" type="text" id="last-name" name="last_name" placeholder="Doe" aria-label="Last name" minlength="2" value="<?= prevValue("last_name") ?>" required />
+            <input class="uk-input" type="text" id="last-name" name="last_name" placeholder="Doe" aria-label="Last name" minlength="2" value="<?= prevValue('last_name') ?>" required />
           </div>
         </div>
 
@@ -78,9 +78,9 @@ $layout = Layout::start("Staff records");
           <label for="department-id">Department</label>
           <select name="department_id" id="department-id" class="uk-select">
             <option></option>
-            <?php foreach ($departments as $department) : ?>
+            <?php foreach ($departments as $department) { ?>
               <option value="<?= $department->id ?>"><?= $department->name ?></option>
-            <?php endforeach; ?>
+            <?php } ?>
           </select>
         </div>
 
@@ -88,29 +88,29 @@ $layout = Layout::start("Staff records");
         <div class="input-group !mt-6">
           <label>Gender</label>
           <div class="space-x-4">
-            <?php foreach(Gender::cases() as $gender): ?>
+            <?php foreach (Gender::cases() as $gender) { ?>
               <label class="!text-black">
-                <input class="uk-radio" type="radio" name="gender" value="<?= $gender->value ?>" <?php (prevValue('gender') == $gender->value) ? "checked=\"checked\"" : "" ?> required /> <?= $gender->name ?>
+                <input class="uk-radio" type="radio" name="gender" value="<?= $gender->value ?>" <?php (prevValue('gender') == $gender->value) ? 'checked="checked"' : '' ?> required /> <?= $gender->name ?>
               </label>
-            <?php endforeach; ?>
+            <?php } ?>
           </div>
         </div>
 
         <div class="input-group">
           <label for="role">Role</label>
-          <input class="uk-input" type="text" id="role" name="role" placeholder="e.g Head of department" value="<?= prevValue("role") ?>" aria-label="Role" />
+          <input class="uk-input" type="text" id="role" name="role" placeholder="e.g Head of department" value="<?= prevValue('role') ?>" aria-label="Role" />
         </div>
 
         <!-- Date of birth -->
         <div class="input-group">
           <label for="dob">Date of birth</label>
-          <input type="date" name="dob" class="uk-input" placeholder="Date of birth" value="<?= prevValue("dob") ?>" required />
+          <input type="date" name="dob" class="uk-input" placeholder="Date of birth" value="<?= prevValue('dob') ?>" required />
         </div>
 
         <!-- Hire date -->
         <div class="input-group">
           <label for="hired-on">Hired on</label>
-          <input type="date" name="hire_date" class="uk-input" placeholder="Hire date" value="<?= prevValue("hire_date") ?>" required />
+          <input type="date" name="hire_date" class="uk-input" placeholder="Hire date" value="<?= prevValue('hire_date') ?>" required />
         </div>
 
         <div class="input-group">

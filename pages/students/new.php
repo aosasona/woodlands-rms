@@ -1,17 +1,29 @@
 <?php
 
+
+
+
+use App\Controllers\StudentController;
 use App\UI\{Breadcrumb, Layout};
 use App\State;
-// use App\Controllers\StaffController;
-use Woodlands\Core\Models\{Department, Staff};
+use App\CountriesList;
+use Phlo\Core\Context;
+use Phlo\Extensions\CSRFToken;
+use Woodlands\Core\Models\{Department, Staff, Course};
 use Woodlands\Core\Models\Enums\Gender;
+
+/** @var Context $ctx */
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+  StudentController::create($ctx);
+}
 
 $departments = Department::new()->all();
 $staff = Staff::new()->all();
+$courses = Course::new()->all();
 
 function prevValue(string $field)
 {
-    return State::prevFormValue("new_student", $field);
+  return State::prevFormValue("new_student", $field);
 }
 
 $layout = Layout::start("Student records");
@@ -29,6 +41,10 @@ $layout = Layout::start("Student records");
 
   <form method="POST" class="max-w-3xl 2xl:max-w-2xl mt-6" enctype="multipart/form-data">
     <?php State::renderError("new_student") ?>
+
+    <?= CSRFToken::input(field_name: CSRFToken::DEFAULT_FIELD_NAME) ?>
+
+    <input type="hidden" name="action" value="create" />
 
     <div class="w-full flex gap-6">
 
@@ -49,6 +65,7 @@ $layout = Layout::start("Student records");
 
       </div>
 
+
       <div class="w-full space-y-4">
         <!-- Name -->
         <div class="w-full grid grid-cols-2 gap-4">
@@ -63,22 +80,22 @@ $layout = Layout::start("Student records");
           </div>
         </div>
 
-        <!-- Department -->
+        <!-- Nationality -->
         <div class="input-group">
-          <label for="department-id">Department</label>
-          <select name="department_id" id="department-id" class="uk-select">
-            <option></option>
-            <?php foreach ($departments as $department) : ?>
-              <option value="<?= $department->id ?>"><?= $department->name ?></option>
+          <label for="nationality">Nationality</label>
+          <select name="nationality" id="nationality" class="uk-select" required>
+            <option value="">Select a country</option>
+            <?php foreach (CountriesList::getList() as $country_code => $country_name) : ?>
+              <option value="<?= $country_code ?>" <?= prevValue("nationality") == $country_code ? "selected" : "" ?>><?= $country_name ?></option>
             <?php endforeach; ?>
           </select>
         </div>
 
         <!-- Gender -->
-        <div class="input-group !mt-6">
+        <div class="input-group -mt-3">
           <label>Gender</label>
           <div class="space-x-4">
-            <?php foreach(Gender::cases() as $gender): ?>
+            <?php foreach (Gender::cases() as $gender) : ?>
               <label class="!text-black">
                 <input class="uk-radio" type="radio" name="gender" value="<?= $gender->value ?>" <?php (prevValue('gender') == $gender->value) ? "checked=\"checked\"" : "" ?> required /> <?= $gender->name ?>
               </label>
@@ -86,18 +103,41 @@ $layout = Layout::start("Student records");
           </div>
         </div>
 
+        <div class="grid grid-cols-2 gap-4 m-0">
+          <!-- Department -->
+          <div class="input-group">
+            <label for="department">Department</label>
+            <select name="department" id="department" class="uk-select">
+              <option></option>
+              <?php foreach ($departments as $department) : ?>
+                <option value="<?= $department->id ?>"><?= ucwords($department->name) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- Course -->
+          <div class="input-group">
+            <label for="course">Course</label>
+            <select name="course" id="course" class="uk-select">
+              <option></option>
+              <?php foreach ($courses as $course) : ?>
+                <option value="<?= $course->id ?>"><?= ucwords($course->name) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+
+
+        <!-- Enrollment date -->
+        <div class="input-group">
+          <label for="enrolled_at">Enrollment date</label>
+          <input type="date" name="enrolled_at" class="uk-input" placeholder="Enrollment date" value="<?= prevValue("enrolled_at") ?>" required />
+        </div>
+
         <!-- Date of birth -->
         <div class="input-group">
           <label for="dob">Date of birth</label>
           <input type="date" name="dob" class="uk-input" placeholder="Date of birth" value="<?= prevValue("dob") ?>" required />
-        </div>
-
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input class="uk-input" type="password" id="password" name="password" placeholder="******" aria-label="Password" />
-          <div class="text-right mt-2">
-            <a href="#" onclick="javascript:void(0)" class="text-xs" data-password-toggle="password">Show password</a>
-          </div>
         </div>
       </div>
 

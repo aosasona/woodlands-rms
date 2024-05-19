@@ -2,9 +2,108 @@ $(function () {
     handleNav();
     handleImagePicker();
     handlePasswordVisibilityToggle();
-    handleSearch();
+    handleListFilter();
     editDepartment();
+
+    // Intercept destructive actions
+    $("[data-confirm]").on("click", function (e) {
+        const message = $(this).data("confirm");
+        if (!confirm(message)) {
+            e.preventDefault();
+        }
+    });
+
+    // Handle filtering data (live grep)
+    $("[data-filter-name]").on("change", handleFilters);
+
+    // Display appropriate students and tutors based on course details
+    $("#course-start-date").on("change", showStudentsInCourseRange).trigger("change");
+    $("#course-department").on("change", showTutorsAndStudentsInDepartment).trigger("change");
 });
+
+function showStudentsInCourseRange() {
+    const value = $(this).val();
+    if (!value) return;
+    const courseStartYear = new Date(value).getFullYear();
+
+    const studentsList = $("#students-list");
+    studentsList.children().each(function () {
+        const enrollmentYear = $(this).data("enrollment-year");
+        // Only display students that have been enrolled after or in the same year the course would start
+        if (enrollmentYear >= courseStartYear) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+function showTutorsAndStudentsInDepartment() {
+    const departmentId = $(this).val();
+    if (!departmentId) return;
+
+    const tutorsList = $("#tutors-list");
+    const studentsList = $("#students-list");
+
+    tutorsList.children().each(function () {
+        const tutorDepartment = $(this).data("department");
+        if (tutorDepartment === departmentId) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+
+    studentsList.children().each(function () {
+        const studentDepartment = $(this).data("department-id");
+        if (studentDepartment === departmentId) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+/**
+ * @param {string} filterString
+ * @returns {Object}
+ **/
+function parseFilters(filterString) {
+    const filters = filterString.split(",");
+    const filter = {};
+
+    filters.forEach((f) => {
+        const parts = f?.split(":");
+        if (!parts || parts.length !== 2) return;
+        filter[parts[0]] = parts[1];
+    });
+
+    return filter;
+}
+
+/**
+ * @param {any} filters
+ **/
+function stringifyFilters(filters) {
+    const filterStr = Object.entries(filters)
+        .map(([key, value]) => `${key}:${value}`)
+        .join(",");
+
+    return filterStr;
+}
+
+function handleFilters() {
+    const name = $(this).data("filter-name");
+    const value = $(this).val();
+    const currentFilterStr = new URLSearchParams(window.location.search)?.get("filters");
+    const filters = currentFilterStr ? parseFilters(currentFilterStr) : {};
+    filters[name] = value;
+
+    const filterStr = stringifyFilters(filters);
+    const url = new URL(window.location.href);
+    url.searchParams.set("filters", filterStr);
+    window.location.href = url.toString();
+}
 
 function handleNav() {
     $("[data-nav-link]").on("click mouseenter", function (_) {
@@ -115,22 +214,19 @@ function handlePasswordVisibilityToggle() {
     });
 }
 
-function handleSearch() {
+function handleListFilter() {
     const searchInput = $("[data-search-input]");
     if (!searchInput.length) return;
 
-    const searchTarget = searchInput.data("search-target");
-    const list = $(`#${searchTarget}`);
-
-    if (!list.length) {
-        console.error("Search target element not found");
-        return;
-    }
-
     searchInput.on("input", function () {
         const query = $(this).val().toLowerCase();
-
+        const searchTarget = $(this).data("search-target");
+        const list = $(`#${searchTarget}`);
         if (!query.length) return list.children().show();
+
+        if (!list.length) {
+            return;
+        }
 
         list.children().each(function () {
             const searchableItems = $(this).find("[data-searchable]");

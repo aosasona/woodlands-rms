@@ -7,9 +7,10 @@ use App\StateType;
 use App\UploadType;
 use DateTime;
 use Phlo\Core\Context;
+use Phlo\Extensions\CSRFToken;
 use Woodlands\Core\Exceptions\AppException;
-use Woodlands\Core\Models\{User,Staff};
-use Woodlands\Core\Models\Enums\{Gender,UserType};
+use Woodlands\Core\Models\{User, Staff};
+use Woodlands\Core\Models\Enums\{Gender, UserType};
 use Rakit\Validation\Validator;
 
 final class StaffController
@@ -17,6 +18,10 @@ final class StaffController
     public static function create(Context $ctx): void
     {
         try {
+            if (!CSRFToken::validate()) {
+                throw new AppException("CSRF token validation failed");
+            }
+
             $validator = new Validator([
                 "required" => "The :attribute field is required",
                 "min" => "The :attribute field must be at least :min characters",
@@ -33,7 +38,7 @@ final class StaffController
                 "role" => "alpha_spaces",
                 "dob" => "required|date",
                 "hire_date" => "required|date",
-                "password" => "required|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/",
+                "password" => "required|min:6",
                 "profile_image" => "required|uploaded_file:0,1M,png,jpeg,jpg"
             ]);
 
@@ -41,19 +46,19 @@ final class StaffController
 
             $validation->validate();
 
-            if($validation->fails()) {
-                throw new AppException("<ul><li>".implode("</li><li>", $validation->errors()->firstOfAll())."</li></ul>");
+            if ($validation->fails()) {
+                throw new AppException("<ul><li>" . implode("</li><li>", $validation->errors()->firstOfAll()) . "</li></ul>");
             }
 
             $dob = new DateTime($_POST["dob"]);
             $age = $dob->diff(new DateTime("now"))->y;
 
-            if($age < 18) {
+            if ($age < 18) {
                 throw new AppException("Staff must be at least 18 years old to be employed");
             }
 
             $hire_date = new DateTime($_POST["hire_date"]);
-            if($hire_date > new DateTime("now")) {
+            if ($hire_date > new DateTime("now")) {
                 throw new AppException("Hire date cannot be in the future");
             }
 
@@ -71,7 +76,7 @@ final class StaffController
 
             $user = User::new();
             $user->email = $staff->generateEmail(true);
-            if($user->where("email_address", "=", $user->email)->one() !== null) {
+            if ($user->where("email_address", "=", $user->email)->one() !== null) {
                 $user->email = $staff->generateEmail(withUniqueSuffix: true);
             }
             $user->setPassword($_POST["password"]);
