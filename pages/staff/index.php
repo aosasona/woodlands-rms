@@ -4,10 +4,16 @@ use Woodlands\Core\Models\Staff;
 
 $page = filter_input(INPUT_GET, "page", FILTER_VALIDATE_INT) ?? 1;
 $limit = 50;
-$staff = Staff::new()
-  ->where("staff_id", "!=", "NULL")
-  ->paginate(page: $page, perPage: $limit)
+$staff_members = Staff::new()
+  ->where("staff_id", "!=", "NULL");
+
+if(!empty($_GET["department"])) {
+    $staff_members = $staff_members->and("`staff`.`department_id`", "=", htmlspecialchars($_GET["department"]));
+}
+
+$staff_members = $staff_members
   ->withRelations("user", "department")
+  ->paginate(page: $page, perPage: $limit)
   ->all();
 
 $layout = Layout::start("Staff records");
@@ -42,13 +48,13 @@ $layout = Layout::start("Staff records");
     </thead>
 
     <tbody>
-      <?php foreach ($staff as $staff): ?>
+      <?php foreach ($staff_members as $staff): ?>
       <tr>
         <td><?= $staff->id ?></td>
         <td><?= ucfirst("{$staff->firstName} {$staff->lastName}") ?></td>
         <td><?= $staff?->user?->email ?? "<i>unknown</i>" ?></td>
         <td><?= $staff->hireDate->format("d/m/Y") ?></td>
-        <td><?= $staff->departmentId == null ? "<i>None</i>" : "" ?></td>
+        <td><?= $staff->departmentId == null ? "<i>None</i>" : "<a href='/staff?department=$staff->departmentId'>".ucfirst($staff->department->name)."</a>" ?></td>
         <td><?= $staff->createdAt->format("d/m/Y H:i") ?></td>
         <td class="space-x-4">
           <a href="/staff/<?= $staff->id ?>">View</a>

@@ -430,16 +430,16 @@
         },
         {
             "name": "trulyao/phlo",
-            "version": "0.4.1",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aosasona/phlo.git",
-                "reference": "f3f66ea884c783134a56cbc875dc099300f519b0"
+                "reference": "f7bb1f1c506730ac6792ed8703462cd81df30e36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aosasona/phlo/zipball/f3f66ea884c783134a56cbc875dc099300f519b0",
-                "reference": "f3f66ea884c783134a56cbc875dc099300f519b0",
+                "url": "https://api.github.com/repos/aosasona/phlo/zipball/f7bb1f1c506730ac6792ed8703462cd81df30e36",
+                "reference": "f7bb1f1c506730ac6792ed8703462cd81df30e36",
                 "shasum": ""
             },
             "require": {
@@ -461,9 +461,9 @@
             "description": "A tiny microframework for rapid modern web development",
             "support": {
                 "issues": "https://github.com/aosasona/phlo/issues",
-                "source": "https://github.com/aosasona/phlo/tree/0.4.1"
+                "source": "https://github.com/aosasona/phlo/tree/0.4.2"
             },
-            "time": "2024-05-12T15:06:57+00:00"
+            "time": "2024-05-18T17:56:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -555,7 +555,7 @@
             "dist": {
                 "type": "path",
                 "url": "./core",
-                "reference": "b9282b9f22cf7e8868c5b8747f64d7fab800f81b"
+                "reference": "8affa0067d16c321ed260d964377cdf3823dcf42"
             },
             "require": {
                 "php": "^8.1",

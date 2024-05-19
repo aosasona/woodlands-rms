@@ -32,7 +32,7 @@ final class AuthController
     public static function logout(Context $ctx): never
     {
         try {
-            $csrf_token = $ctx->bodyOr("__csrf_token", "");
+            $csrf_token = $ctx->bodyOr("__logout_csrf_token", "");
             if (!CSRFToken::validate($csrf_token)) {
                 $ctx->redirect("/sign-in");
             }

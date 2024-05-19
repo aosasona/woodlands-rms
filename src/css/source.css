@@ -1,162 +1,161 @@
 @import "uikit.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --color-primary-blue: hsl(237, 99%, 51%);
-    --color-primary-purple: hsl(301, 93%, 26%);
-    --color-primary-pink: hsl(349, 94%, 87%);
-    --color-secondary-grey: hsl(200, 15%, 84%);
-    --color-success: hsl(112, 99%, 72%);
-    --color-notice: hsl(47, 99%, 70%);
-    --color-error: hsl(15, 97%, 61%);
+	--color-primary-blue: hsl(237, 99%, 51%);
+	--color-primary-purple: hsl(301, 93%, 26%);
+	--color-primary-pink: hsl(349, 94%, 87%);
+	--color-secondary-grey: hsl(200, 15%, 84%);
+	--color-success: hsl(112, 99%, 72%);
+	--color-notice: hsl(47, 99%, 70%);
+	--color-error: hsl(15, 97%, 61%);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 html,
 body {
-    font-family: "Inter", "Roboto", sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1.5;
+	font-family: "Inter", "Roboto", sans-serif;
+	font-size: 0.95rem;
+	font-weight: 500;
+	line-height: 1.5;
 }
 
 p {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 h1 {
-    font-size: theme("fontSize.4xl");
+	font-size: theme("fontSize.4xl");
 }
 
-
 main.container {
-    margin-top: 7rem;
-    margin-inline: auto;
+	margin-top: 7rem;
+	margin-inline: auto;
 }
 
 nav {
-    & a, input[type="submit"]  {
-        display: inline-block;
-        color: white;
-        font-size: 16px;
-        text-decoration: none;
-        cursor: pointer;
+	& a,
+	input[type="submit"] {
+		display: inline-block;
+		color: white;
+		font-size: 16px;
+		text-decoration: none;
+		cursor: pointer;
 
-        &:hover {
-            color: theme("colors.brand.pink");
-            text-decoration: none;
-        }
+		&:hover {
+			color: theme("colors.brand.pink");
+			text-decoration: none;
+		}
+	}
 
-    }
+	& div[data-anchor] {
+		@apply w-max bg-brand-grey absolute top-[100%] -left-[50%] flex-col;
 
-    & div[data-anchor] {
-        @apply w-max bg-brand-grey absolute top-[100%] -left-[50%] flex-col;
+		& a {
+			@apply text-black border-b border-b-white px-4 py-3;
 
-        & a {
-            @apply text-black border-b border-b-white px-4 py-3;
+			&:last-child {
+				@apply border-b-0;
+			}
 
-            &:last-child {
-                @apply border-b-0;
-            }
+			&:hover {
+				@apply bg-brand-purple text-white;
+			}
+		}
+	}
 
-            &:hover {
-                @apply bg-brand-purple text-white;
-            }
-        }
-    }
-
-    & div[data-nav-link] {
-        @apply relative h-full flex items-center;
-    }
+	& div[data-nav-link] {
+		@apply relative h-full flex items-center;
+	}
 }
 
 .input-group {
-    @apply flex flex-col mb-4;
+	@apply flex flex-col mb-4;
 
-    & label {
-        @apply text-gray-400 text-sm mb-1;
-    }
+	& label {
+		@apply text-gray-400 text-sm mb-1;
+	}
 }
 
 .uk-button-primary {
-    background-color: var(--color-primary-blue);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+	background-color: var(--color-primary-blue);
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s;
 
-    &:hover {
-        background-color: white;
-        color: var(--color-primary-blue);
-        border: 1px solid var(--color-primary-blue);
-    }
+	&:hover {
+		background-color: white;
+		color: var(--color-primary-blue);
+		border: 1px solid var(--color-primary-blue);
+	}
 }
 
 .uk-breadcrumb {
-    & a:hover {
-        color: var(--color-primary-purple) !important;
-    }
+	& a:hover {
+		color: var(--color-primary-purple) !important;
+	}
 }
 
 .uk-input {
-    &:focus {
-        border-color: var(--color-primary-blue);
-    }
+	&:focus {
+		border-color: var(--color-primary-blue);
+	}
 }
 
 .uk-toggle-switch {
-    scale: 0.75;
+	scale: 0.75;
 }
 
 .uk-subnav {
-    & .uk-active a {
-        @apply bg-brand-purple text-white px-3 pt-2 pb-1.5 rounded;
-    }
+	& .uk-active a {
+		@apply bg-brand-purple text-white px-3 pt-2 pb-1.5 rounded;
+	}
 }
 
 button[data-image-picker-reset] {
-    @apply w-8 aspect-square items-center justify-center absolute top-0 right-0 bg-red-500 hover:bg-red-400 text-white text-sm transition-all hidden;
+	@apply w-8 aspect-square items-center justify-center absolute top-0 right-0 bg-red-500 hover:bg-red-400 text-white text-sm transition-all hidden;
 }
 
 .records {
-    & thead {
-        & tr {
-            @apply text-left text-sm font-normal bg-brand-grey text-black;
+	& thead {
+		& tr {
+			@apply text-left text-sm font-normal bg-brand-grey text-black;
 
-            & th {
-                @apply px-4 py-3;
-            }
-        }
-    }
+			& th {
+				@apply px-4 py-3;
+			}
+		}
+	}
 
-    & tbody {
-        & tr {
-            @apply text-left text-sm font-normal border-b border-brand-grey;
+	& tbody {
+		& tr {
+			@apply text-left text-sm font-normal border-b border-brand-grey;
 
-            &:last-child {
-                @apply border-b-0;
-            }
+			&:last-child {
+				@apply border-b-0;
+			}
 
-            & td {
-                @apply px-4 py-3;
+			& td {
+				@apply px-4 py-3;
 
-                & i {
-                    @apply text-gray-400;
-                }
-            }
-        }
-    }
+				& i {
+					@apply text-gray-400;
+				}
+			}
+		}
+	}
 
-    & a  {
-        @apply text-brand-blue hover:text-brand-purple;
-    }
+	& a {
+		@apply text-brand-blue hover:text-brand-purple;
+	}
 }

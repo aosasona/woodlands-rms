@@ -19,10 +19,8 @@ try {
     } catch(Exception) {
     }
 
-    // Initialize seesson
-    if(session_status() !== PHP_SESSION_ACTIVE) {
-        session_start();
-    }
+    // Initialize session
+    session_start();
 
     Router::new()
         ->addRule(Rule::new("api")->setRuleType(RuleType::API)->setTarget(__DIR__ . "/api"))

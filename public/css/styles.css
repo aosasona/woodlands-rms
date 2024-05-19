@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 /*! UIkit 3.20.8 | https://www.getuikit.com | (c) 2014 - 2024 YOOtheme | MIT License */
 
@@ -9463,6 +9463,24 @@ video {
   text-decoration:none
 }
 
+.uk-button-default{
+  background-color:transparent;
+  color:#333;
+  border:1px solid #e5e5e5
+}
+
+.uk-button-default:hover{
+  background-color:transparent;
+  color:#333;
+  border-color:#b2b2b2
+}
+
+.uk-button-default:active, .uk-button-default.uk-active{
+  background-color:transparent;
+  color:#333;
+  border-color:#999999
+}
+
 .uk-button-primary{
   background-color:#1e87f0;
   color:#fff;
@@ -9494,7 +9512,13 @@ video {
   z-index:1
 }
 
+.uk-button-default:focus{
+}
+
 .uk-button-primary:focus{
+}
+
+.uk-button-default:disabled{
 }
 
 .uk-button-primary:disabled{
@@ -9971,6 +9995,10 @@ button.uk-icon:not(:disabled){
   height:100%
 }
 
+.max-h-96{
+  max-height:24rem
+}
+
 .min-h-screen{
   min-height:100vh
 }
@@ -10075,6 +10103,10 @@ button.uk-icon:not(:disabled){
   --tw-space-y-reverse:0;
   margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom:calc(1rem * var(--tw-space-y-reverse))
+}
+
+.overflow-y-auto{
+  overflow-y:auto
 }
 
 .border{
@@ -10226,7 +10258,8 @@ main.container {
 }
 
 nav {
-  & a, input[type="submit"]  {
+  & a,
+	input[type="submit"] {
     display: inline-block;
     color: white;
     font-size: 16px;

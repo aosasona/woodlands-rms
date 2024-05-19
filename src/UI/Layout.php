@@ -19,6 +19,7 @@ class Layout
         return new self($title, $description);
     }
 
+    /** @psalm-suppress UnusedVariable */
     public function end(): void
     {
         $content = ob_get_clean();
