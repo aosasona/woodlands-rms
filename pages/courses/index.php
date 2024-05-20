@@ -35,7 +35,7 @@ $layout = Layout::start("Courses");
   <div class="w-full grid grid-cols-12 gap-6 mt-6">
     <!-- Courses -->
     <section class="col-span-4">
-      <input type="search" class="uk-input" placeholder="Search for courses" aria-label="Search for courses" data-search-input data-search-target="course-list" />
+      <input type="search" class="uk-input" placeholder="Search for courses" aria-label="Search for courses" data-search-input data-search-target="courses-list" />
       <a href="/courses/new" class="uk-button uk-button-primary mt-4">Create course</a>
 
       <!-- Courses -->
@@ -47,22 +47,24 @@ $layout = Layout::start("Courses");
           </div>
 
         <?php else : ?>
-          <?php foreach ($courses as $course) : ?>
+          <div id="courses-list">
+            <?php foreach ($courses as $course) : ?>
 
-            <a href="?selected=<?= $course->id ?>" class="w-full inline-block hover:no-underline">
-              <div class="w-full px-4 py-3 <?= $course->id == $selected_course_id ? 'bg-brand-purple text-white hover:text-brand-purple hover:bg-purple-100' : 'hover:bg-brand-pink hover:text-black' ?>">
-                <?= $course->name ?>
-              </div>
-            </a>
+              <a href="?selected=<?= $course->id ?>" class="w-full inline-block hover:no-underline">
+                <div class="w-full px-4 py-3 <?= $course->id == $selected_course_id ? 'bg-brand-purple text-white hover:text-brand-purple hover:bg-purple-100' : 'hover:bg-brand-pink hover:text-black' ?>" data-searchable>
+                  <?= $course->name ?>
+                </div>
+              </a>
 
-          <?php endforeach; ?>
+            <?php endforeach; ?>
+          </div>
         <?php endif; ?>
       </div>
 
       <?php if (!empty($selected_course_id)) : ?>
         <div class="flex items-center gap-3 mt-3">
-          <a href="/coures/new?course_id=<?= $selected_course_id ?>&edit" class="uk-button uk-button-small uk-button-primary">Edit</a>
-          <a href="/coures/new?course_id=<?= $selected_course_id ?>&delete" class="uk-button uk-button-small uk-button-danger">Delete</a>
+          <a href="/courses/new?course_id=<?= $selected_course_id ?>&edit" class="uk-button uk-button-small uk-button-primary">Edit</a>
+          <a href="/courses/new?course_id=<?= $selected_course_id ?>&delete" class="uk-button uk-button-small uk-button-danger">Delete</a>
         </div>
       <?php endif; ?>
     </section>
@@ -81,7 +83,7 @@ $layout = Layout::start("Courses");
           </div>
 
         <?php else : ?>
-          <ul id="modules-list">
+          <div id="modules-list">
             <?php foreach ($modules as $module) : ?>
 
               <div class="w-full flex justify-between border border-brand-grey px-4 py-3 mb-4">
@@ -90,7 +92,7 @@ $layout = Layout::start("Courses");
               </div>
 
             <?php endforeach; ?>
-          </ul>
+          </div>
         <?php endif; ?>
       </div>
     </section>

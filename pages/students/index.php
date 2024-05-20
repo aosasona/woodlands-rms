@@ -106,7 +106,7 @@ $layout = Layout::start("Student records");
           <td><?= $student->createdAt->format("d/m/Y H:i") ?></td>
           <td class="space-x-4">
             <a href="/students/<?= $student->id ?>">View</a>
-            <a href="/students/<?= $student->id ?>/edit">Edit</a>
+            <a href="/students/edit?id=<?= $student->id ?>">Edit</a>
           </td>
         </tr>
       <?php endforeach; ?>

@@ -34,6 +34,23 @@ final class FileController
         return $destination;
     }
 
+    public static function getProfilePictureUrl(int $userId): string
+    {
+        return "/public/uploads/profile_images/" . self::fileNameFor($userId, "png", UploadType::ProfileImage);
+    }
+
+    public static function readProfilePictureAsBase64(int $userId): string
+    {
+        $path = self::DIR_PROFILE_IMAGE . "/" . self::fileNameFor($userId, "png", UploadType::ProfileImage);
+
+        if (!file_exists($path)) {
+            return "";
+        }
+
+        $data = file_get_contents($path);
+        return "data:image/png;base64," . base64_encode($data);
+    }
+
     public static function fileNameFor(int $userId, string $extension, UploadType $type): string
     {
         $extension = match ($extension) {

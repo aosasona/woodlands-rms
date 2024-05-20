@@ -10085,6 +10085,10 @@ button.uk-icon:not(:disabled){
   width:83.333333%
 }
 
+.w-64{
+  width:16rem
+}
+
 .w-full{
   width:100%
 }
@@ -10192,6 +10196,12 @@ button.uk-icon:not(:disabled){
   --tw-space-x-reverse:0;
   margin-right:calc(1rem * var(--tw-space-x-reverse));
   margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse:0;
+  margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]){
@@ -10678,6 +10688,10 @@ button[data-image-picker-reset]:hover{
 
   .lg\:grid-cols-2{
     grid-template-columns:repeat(2, minmax(0, 1fr))
+  }
+
+  .lg\:flex-row{
+    flex-direction:row
   }
 
   .lg\:px-2{

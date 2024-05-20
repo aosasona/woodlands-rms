@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 use App\Controllers\StudentController;
 use App\UI\{Breadcrumb, Layout};
 use App\State;
@@ -12,18 +9,40 @@ use Phlo\Extensions\CSRFToken;
 use Woodlands\Core\Models\{Department, Staff, Course};
 use Woodlands\Core\Models\Enums\Gender;
 
-/** @var Context $ctx */
+if (!isset($mode)) {
+  $mode = "create";
+}
+
+
+/** 
+ * @var Context $ctx 
+ * @var string $mode
+ */
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-  StudentController::create($ctx);
+  if ($mode === "update") {
+    StudentController::update($ctx);
+  } else {
+    StudentController::create($ctx);
+  }
 }
 
 $departments = Department::new()->all();
-$staff = Staff::new()->all();
 $courses = Course::new()->all();
+$staff = Staff::new()
+  ->literalWhere("`staff_id` IS NOT NULL")
+  ->withRelations("department")
+  ->orderBy("staff.`first_name`", "ASC")->all();
+
+// If we are in 'update' mode, load the current student's records
 
 function prevValue(string $field)
 {
   return State::prevFormValue("new_student", $field);
+}
+
+if ($mode == "update") {
+  $student_id = preg_replace("/[^0-9]/", "", $_GET["id"]);
+  StudentController::loadSessionData($ctx, intval($student_id));
 }
 
 $layout = Layout::start("Student records");
@@ -31,12 +50,12 @@ $layout = Layout::start("Student records");
 
 
 <main class="container">
-  <h1 class="font-bold">New student</h1>
+  <h1 class="font-bold"><?= $mode == "create" ? "New" : "Edit" ?> student</h1>
   <?php
   Breadcrumb::render([
     Breadcrumb::crumb(name: "Records", disabled: true),
     Breadcrumb::crumb(name: "Students", path: "/students"),
-    Breadcrumb::crumb(name: "Create new record", path: "/students/new", disabled: true),
+    Breadcrumb::crumb(name: $mode == "create" ? "Create new record" : "Update record", path: "/students/new", disabled: true),
   ]); ?>
 
   <form method="POST" class="max-w-3xl 2xl:max-w-2xl mt-6" enctype="multipart/form-data">
@@ -44,7 +63,11 @@ $layout = Layout::start("Student records");
 
     <?= CSRFToken::input(field_name: CSRFToken::DEFAULT_FIELD_NAME) ?>
 
-    <input type="hidden" name="action" value="create" />
+    <input type="hidden" name="action" value="<?= $mode ?>" />
+
+    <?php if ($mode === "update") : ?>
+      <input type="hidden" name="student_id" value="<?= $student_id ?>" />
+    <?php endif; ?>
 
     <div class="w-full flex gap-6">
 
@@ -61,7 +84,7 @@ $layout = Layout::start("Student records");
           <button data-image-picker-reset="profile-image"><span uk-icon="icon: close"></span></button>
         </label>
 
-        <input type="file" id="profile-image" name="profile_image" accept="image/png, image/jpeg" class="hidden" data-image-picker />
+        <input type="file" id="profile-image" name="profile_image" accept="image/png, image/jpeg" class="hidden" value="<?= prevValue("profile_image") ?>" data-image-picker />
 
       </div>
 
@@ -97,7 +120,7 @@ $layout = Layout::start("Student records");
           <div class="space-x-4">
             <?php foreach (Gender::cases() as $gender) : ?>
               <label class="!text-black">
-                <input class="uk-radio" type="radio" name="gender" value="<?= $gender->value ?>" <?php (prevValue('gender') == $gender->value) ? "checked=\"checked\"" : "" ?> required /> <?= $gender->name ?>
+                <input class="uk-radio" type="radio" name="gender" value="<?= $gender->value ?>" <?= (prevValue('gender') == $gender->value) ? "checked=\"checked\"" : "" ?> required /> <?= $gender->name ?>
               </label>
             <?php endforeach; ?>
           </div>
@@ -110,7 +133,7 @@ $layout = Layout::start("Student records");
             <select name="department" id="department" class="uk-select">
               <option></option>
               <?php foreach ($departments as $department) : ?>
-                <option value="<?= $department->id ?>"><?= ucwords($department->name) ?></option>
+                <option value="<?= $department->id ?>" <?= prevValue("department") == $department->id ? "selected" : "" ?>><?= ucwords($department->name) ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -121,12 +144,24 @@ $layout = Layout::start("Student records");
             <select name="course" id="course" class="uk-select">
               <option></option>
               <?php foreach ($courses as $course) : ?>
-                <option value="<?= $course->id ?>"><?= ucwords($course->name) ?></option>
+                <option value="<?= $course->id ?>" <?= prevValue("course") == $course->id ? "selected" : "" ?>><?= ucwords($course->name) ?></option>
               <?php endforeach; ?>
             </select>
           </div>
         </div>
 
+        <!-- Personal tutor -->
+        <div class="input-group">
+          <label for="personal-tutor">Personal tutor</label>
+          <select name="personal_tutor" id="personal-tutor" class="uk-select">
+            <option></option>
+            <?php foreach ($staff as $tutor) : ?>
+              <option value="<?= $tutor->id ?>" <?= prevValue("personal_tutor") == $tutor->id ? "selected" : "" ?>>
+                <?= ucwords("{$tutor->firstName} {$tutor->lastName}") . (!empty($tutor?->department) ? ucwords(" - {$tutor?->department?->name}") : "") ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
         <!-- Enrollment date -->
         <div class="input-group">

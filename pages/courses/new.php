@@ -8,7 +8,6 @@ use App\UI\{Breadcrumb, Layout};
 use Woodlands\Core\Models\{Department, Staff, Student, Module};
 use App\Controllers\CourseController;
 
-
 /** @var Phlo\Core\Context $ctx */
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $action = $_POST["action"];

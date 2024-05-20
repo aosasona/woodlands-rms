@@ -25,14 +25,14 @@ $email = $user?->email ?? "unknown";
       <a href="#">Management</a>
 
       <div data-anchor="management" class="hidden">
-        <a href="/attendance">Attendance</a>
+        <!-- <a href="/attendance">Attendance</a> -->
         <a href="/courses">Course management</a>
-        <a href="/modules">Module management</a>
+        <!-- <a href="/modules">Module management</a> -->
       </div>
     </div>
 
     <form action="/api/logout" method="POST">
-      <?php echo CSRFToken::input(field_name: "__logout_csrf_token") ?>
+      <?= CSRFToken::input(field_name: "__logout_csrf_token") ?>
       <div uk-tooltip="<?= "Signed in as {$email}" ?>">
         <input type="submit" name="logout" value="Logout" />
       </div>

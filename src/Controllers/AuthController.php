@@ -21,7 +21,7 @@ final class AuthController
             $remember_me = $ctx->bodyOr("remember_me", "") == "on";
 
             Auth::login($email, $password, $remember_me, [UserType::Staff]);
-            $ctx->redirect("/");
+            $ctx->redirect("/courses");
         } catch (Exception $e) {
             $message = $e instanceof AppException ? $e->getMessage() : "An error occurred";
             State::persist("signin", $message, StateType::Error);
@@ -33,7 +33,7 @@ final class AuthController
     {
         try {
             $csrf_token = $ctx->bodyOr("__logout_csrf_token", "");
-            if (!CSRFToken::validate($csrf_token)) {
+            if (!CSRFToken::validate($csrf_token, "__logout_csrf_token")) {
                 $ctx->redirect("/sign-in");
             }
 
