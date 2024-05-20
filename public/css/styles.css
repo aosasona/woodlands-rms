@@ -9491,10 +9491,32 @@ video {
   color:#fff
 }
 
+.uk-button-danger{
+  background-color:#f0506e;
+  color:#fff;
+  border:1px solid transparent
+}
+
+.uk-button-danger:hover{
+  background-color:#ee395b;
+  color:#fff
+}
+
+.uk-button-danger:active, .uk-button-danger.uk-active{
+  background-color:#ec2147;
+  color:#fff
+}
+
 .uk-button-default:disabled, .uk-button-primary:disabled, .uk-button-secondary:disabled, .uk-button-danger:disabled{
   background-color:transparent;
   color:#999;
   border-color:#e5e5e5
+}
+
+.uk-button-small{
+  padding:0 15px;
+  line-height:28px;
+  font-size:0.875rem
 }
 
 .uk-button-group > .uk-button:nth-child(n + 2), .uk-button-group > div:nth-child(n + 2) .uk-button{
@@ -9512,10 +9534,16 @@ video {
 .uk-button-primary:focus{
 }
 
+.uk-button-danger:focus{
+}
+
 .uk-button-default:disabled{
 }
 
 .uk-button-primary:disabled{
+}
+
+.uk-button-danger:disabled{
 }
 
 .uk-breadcrumb{
@@ -9969,6 +9997,10 @@ button.uk-icon:not(:disabled){
   margin-top:6rem
 }
 
+.mt-3{
+  margin-top:0.75rem
+}
+
 .mt-4{
   margin-top:1rem
 }
@@ -9987,6 +10019,10 @@ button.uk-icon:not(:disabled){
 
 .block{
   display:block
+}
+
+.inline-block{
+  display:inline-block
 }
 
 .flex{
@@ -10019,6 +10055,10 @@ button.uk-icon:not(:disabled){
 
 .h-96{
   height:24rem
+}
+
+.h-\[576px\]{
+  height:576px
 }
 
 .h-\[80vh\]{
@@ -10105,6 +10145,10 @@ button.uk-icon:not(:disabled){
 
 .justify-between{
   justify-content:space-between
+}
+
+.gap-3{
+  gap:0.75rem
 }
 
 .gap-4{
@@ -10203,9 +10247,19 @@ button.uk-icon:not(:disabled){
   padding-right:0.75rem
 }
 
+.px-4{
+  padding-left:1rem;
+  padding-right:1rem
+}
+
 .px-8{
   padding-left:2rem;
   padding-right:2rem
+}
+
+.py-3{
+  padding-top:0.75rem;
+  padding-bottom:0.75rem
 }
 
 .py-4{
@@ -10234,6 +10288,11 @@ button.uk-icon:not(:disabled){
   line-height:2.25rem
 }
 
+.text-lg{
+  font-size:1.125rem;
+  line-height:1.75rem
+}
+
 .text-sm{
   font-size:0.875rem;
   line-height:1.25rem
@@ -10251,6 +10310,10 @@ button.uk-icon:not(:disabled){
 
 .font-bold{
   font-weight:700
+}
+
+.font-semibold{
+  font-weight:600
 }
 
 .uppercase{
@@ -10276,6 +10339,11 @@ button.uk-icon:not(:disabled){
 
 .text-brand-notice{
   color:var(--color-notice)
+}
+
+.text-gray-400{
+  --tw-text-opacity:1;
+  color:rgb(156 163 175 / var(--tw-text-opacity))
 }
 
 .text-gray-500{
@@ -10571,6 +10639,28 @@ button[data-image-picker-reset]:hover{
   & a:hover{
     color:var(--color-primary-purple)
   }
+}
+
+.hover\:bg-brand-pink:hover{
+  background-color:var(--color-primary-pink)
+}
+
+.hover\:bg-purple-100:hover{
+  --tw-bg-opacity:1;
+  background-color:rgb(243 232 255 / var(--tw-bg-opacity))
+}
+
+.hover\:text-black:hover{
+  --tw-text-opacity:1;
+  color:rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.hover\:text-brand-purple:hover{
+  color:var(--color-primary-purple)
+}
+
+.hover\:no-underline:hover{
+  text-decoration-line:none
 }
 
 @media (min-width: 1024px){

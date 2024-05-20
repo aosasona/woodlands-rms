@@ -65,7 +65,7 @@ final class CourseController
             }
 
             // Assign student to course
-            $students_stmt = $conn->prepare("INSERT INTO `student_courses` (`course_id`, `student_id`) VALUES (:course_id, :student_id)");
+            $students_stmt = $conn->prepare("INSERT IGNORE INTO `student_courses` (`course_id`, `student_id`) VALUES (:course_id, :student_id)");
             foreach ($students as $student) {
                 $students_stmt->execute(["course_id" => $course->id, "student_id" => $student]);
             }
