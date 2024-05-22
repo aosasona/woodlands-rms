@@ -1,17 +1,27 @@
 <?php
 
+
+
+
+use App\Controllers\CourseController;
+use App\State;
 use App\UI\{Breadcrumb, Layout};
+use Phlo\Core\Context;
 use Woodlands\Core\Models\{Course, Module};
+
+/** @var Context $ctx */
+
+$selected_course_id = $_GET["selected"] ?? null;
+
+if ($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST["action"]) && $_POST["action"] === "delete") {
+  CourseController::delete($ctx, $selected_course_id);
+}
 
 $courses = Course::new()->all();
 
 /** @var Module[] */
 $modules = array();
 
-/** @var array<int, array{tutors_count:int,students_count:int}> */
-$module_counts = array();
-
-$selected_course_id = $_GET["selected"] ?? null;
 if (!empty($selected_course_id)) {
   $raw_modules = Module::new()->query("SELECT m.* FROM `modules` m JOIN `course_modules` cm ON m.`module_id` = cm.`module_id` WHERE cm.`course_id` = :course_id", ["course_id" => $selected_course_id]);
   foreach ($raw_modules as $module) {
@@ -31,6 +41,8 @@ $layout = Layout::start("Courses");
     Breadcrumb::crumb(name: "Management", disabled: true),
     Breadcrumb::crumb(name: "Courses", path: "/courses", disabled: true),
   ]); ?>
+
+  <?php State::renderError("delete_course") ?>
 
   <div class="w-full grid grid-cols-12 gap-6 mt-6">
     <!-- Courses -->
@@ -63,8 +75,13 @@ $layout = Layout::start("Courses");
 
       <?php if (!empty($selected_course_id)) : ?>
         <div class="flex items-center gap-3 mt-3">
-          <a href="/courses/new?course_id=<?= $selected_course_id ?>&edit" class="uk-button uk-button-small uk-button-primary">Edit</a>
-          <a href="/courses/new?course_id=<?= $selected_course_id ?>&delete" class="uk-button uk-button-small uk-button-danger">Delete</a>
+          <a href="/courses/edit?id=<?= $selected_course_id ?>" class="uk-button uk-button-small uk-button-primary">Edit</a>
+
+          <form method="post">
+            <input type="hidden" name="action" value="delete" />
+            <input type="hidden" name="course_id" value="<?= $selected_course_id ?>" />
+            <button type="submit" class="uk-button uk-button-small uk-button-danger" data-confirm="Are you sure you want to delete this course?">Delete</button>
+          </form>
         </div>
       <?php endif; ?>
     </section>
@@ -79,7 +96,7 @@ $layout = Layout::start("Courses");
         <?php if (empty($modules)) : ?>
 
           <div class="w-full h-full flex items-center justify-center">
-            <p class="text-center text-gray-400">No modules found.</p>
+            <p class="text-center text-gray-400"><?= empty($selected_course_id) ? "Select a course to view associated modules" : "No modules found for this course." ?></p>
           </div>
 
         <?php else : ?>

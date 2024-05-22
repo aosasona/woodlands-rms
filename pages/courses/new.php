@@ -8,25 +8,34 @@ use App\UI\{Breadcrumb, Layout};
 use Woodlands\Core\Models\{Department, Staff, Student, Module};
 use App\Controllers\CourseController;
 
-/** @var Phlo\Core\Context $ctx */
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $action = $_POST["action"];
+if (!isset($mode)) {
+    $mode = "create";
+}
 
-    if ($action === "create") {
+/** @var Phlo\Core\Context $ctx */
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    if ($mode === "update") {
+        CourseController::update($ctx);
+    } else {
         CourseController::create($ctx);
     }
-
-    $ctx->redirect("/courses/new");
 }
 
 
 $breadcrumbs = [
     Breadcrumb::crumb(name: "Management", disabled: true),
     Breadcrumb::crumb(name: "Courses", path: "/courses"),
-    Breadcrumb::crumb(name: "Create new course", path: "/courses/new", disabled: true),
+    Breadcrumb::crumb(name: $mode == "create" ? "Create new course" : "Update course", path: "/courses/new", disabled: true),
 ];
 
 $prevValue = State::curryPrevFormValue("new_course");
+
+// If we are in 'update' mode, load the current student's records
+if ($mode == "update") {
+    $course_id = preg_replace("/[^0-9]/", "", $_GET["id"]);
+    CourseController::loadSessionData($ctx, intval($course_id));
+}
 
 $departments = Department::new()->all();
 $students = Student::new()->literalWhere("`students`.`student_id` IS NOT NULL")->with("user")->all();
@@ -48,7 +57,11 @@ $layout = Layout::start("New course");
 
         <?= CSRFToken::input(field_name: CSRFToken::DEFAULT_FIELD_NAME) ?>
 
-        <input type="hidden" name="action" value="create" id="courseFormAction" />
+        <input type="hidden" name="action" value="<?= $mode ?>" id="courseFormAction" />
+
+        <?php if ($mode === "update") : ?>
+            <input type="hidden" name="course_id" value="<?= $course_id ?>" />
+        <?php endif; ?>
 
         <ul class="uk-subnav uk-subnav-primary mt-4" uk-switcher>
             <li><a href="#">Details</a></li>

@@ -206,8 +206,9 @@ final class StaffController
             if (empty($staff_id)) throw new AppException("Staff ID is required");
 
             $staff = Staff::new()->findById($staff_id);
-            $staff->delete();
+            if (empty($staff)) throw new AppException("Staff with ID `{$staff_id}` not found");
 
+            $staff->delete();
             $ctx->redirect("/staff");
         } catch (\Exception $e) {
             $sid = $_POST["staff_id"] ?? "";

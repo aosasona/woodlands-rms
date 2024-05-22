@@ -188,6 +188,8 @@ final class StudentController
 			if (empty($student_id)) throw new AppException("Student ID is required");
 
 			$student = Student::new()->findById($student_id);
+			if (empty($student)) throw new AppException("Student with ID `{$student_id}` not found");
+
 			$student->delete();
 
 			$ctx->redirect("/students");

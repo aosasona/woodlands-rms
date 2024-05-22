@@ -15,7 +15,7 @@ $prev_modules = $prevValue("modules") ?? [];
       <?php foreach ($modules as $module) : ?>
         <li class="flex justify-between items-center px-3 pt-2 pb-1 m-0 select-none" data-module-id="<?= $module->id ?>">
           <label for="module_<?= $module->id ?>" class="space-x-2">
-            <input type="checkbox" class="uk-checkbox" name="modules[]" id="module_<?= $module->id ?>" value="<?= $module->id ?>" <?= in_array((string) $module->id, $prev_modules) ? "selected='selected'" : "" ?> />
+            <input type="checkbox" class="uk-checkbox" name="modules[]" id="module_<?= $module->id ?>" value="<?= $module->id ?>" <?= in_array($module->id, $prev_modules) ? "checked='checked'" : "" ?> />
             <span data-searchable><?= strtoupper($module->code) . " - " . ucwords("{$module->name}") ?></span>
           </label>
         </li>

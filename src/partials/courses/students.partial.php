@@ -15,7 +15,7 @@ $prev_students = $prevValue("students") ?? [];
       <?php foreach ($students as $student) : ?>
         <li class="flex justify-between items-center px-3 pt-2 pb-1 m-0 select-none" data-student-id="<?= $student->id ?>" data-enrollment-year="<?= $student->enrolledAt->format("Y") ?>">
           <label for="student_<?= $student->id ?>" class="space-x-2">
-            <input type="checkbox" class="uk-checkbox" id="student_<?= $student->id ?>" name="students[]" value="<?= $student->id ?>" <?= in_array((string)$student->id, $prev_students) ? "selected='selected'" : "" ?> />
+            <input type="checkbox" class="uk-checkbox" id="student_<?= $student->id ?>" name="students[]" value="<?= $student->id ?>" <?= in_array((string)$student->id, $prev_students) ? "checked='checked'" : "" ?> />
 
             <span data-searchable>
               <?= ucwords("{$student->firstName} {$student->lastName} ({$student->id})") ?>
