@@ -1,7 +1,11 @@
 <?php
 
 
+
+
 use App\Controllers\FileController;
+use App\Controllers\StudentController;
+use App\State;
 use App\UI\Layout;
 use Phlo\Core\Context;
 use Woodlands\Core\Models\Student;
@@ -12,6 +16,10 @@ use Woodlands\Core\Database\Connection;
 $student_id = preg_replace(pattern: "[^0-9]", replacement: "",  subject: $ctx->getParam("id", ""));
 if (empty($student_id)) {
   $ctx->redirect("/students");
+}
+
+if ($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST["action"]) && $_POST["action"] === "delete") {
+  StudentController::delete($ctx);
 }
 
 $student = Student::new()
@@ -38,6 +46,8 @@ $layout = Layout::start(empty($student) ? "Not found" : "{$student->firstName} {
     return; ?>
 <?php endif; ?>
 
+<?php State::renderError("delete_student") ?>
+
 <div class="flex fiex-col lg:flex-row gap-6 mt-8">
   <img src="<?= FileController::getProfilePictureUrl($student->user->id) ?>" alt="<?= $student->firstName . " " . $student->lastName ?>" class="w-64 aspect-square" />
 
@@ -45,7 +55,9 @@ $layout = Layout::start(empty($student) ? "Not found" : "{$student->firstName} {
     <p><b>Name:</b> <?= ucwords("{$student->firstName} {$student->lastName}") ?></p>
     <p><b>Student e-mail address:</b> <a href="mailto:<?= $student->user->email ?>"><?= $student->user->email ?></a></p>
     <p><b>Department:</b> <?= ucwords($student->department->name) ?></p>
-    <p><b>Personal tutor:</b> <a href="/staff/<?= $personal_tutor['staff_id'] ?>"><?= $personal_tutor ? ucwords("{$personal_tutor["first_name"]} {$personal_tutor["last_name"]}") : "<span class='text-gray-400'><i>Unassigned</i></span>" ?></a></p>
+    <?php if (!empty($personal_tutor)) : ?>
+      <p><b>Personal tutor:</b> <a href="/staff/<?= $personal_tutor['staff_id'] ?>"><?= $personal_tutor ? ucwords("{$personal_tutor["first_name"]} {$personal_tutor["last_name"]}") : "<span class='text-gray-400'><i>Unassigned</i></span>" ?></a></p>
+    <?php endif; ?>
     <p>
       <b>Modules:</b>
       <?php if (empty($modules)) : ?>
@@ -61,7 +73,11 @@ $layout = Layout::start(empty($student) ? "Not found" : "{$student->firstName} {
 
 <div class="flex items-center gap-3 mt-3">
   <a href="/students/edit?id=<?= $student->id ?>" class="uk-button uk-button-small uk-button-primary">Edit</a>
-  <a href="" class="uk-button uk-button-small uk-button-danger" data-confirm="Are you sure you want to delete this student?">Delete</a>
+  <form method="post">
+    <input type="hidden" name="action" value="delete" />
+    <input type="hidden" name="student_id" value="<?= $student->id ?>" />
+    <button type="submit" class="uk-button uk-button-small uk-button-danger" data-confirm="Are you sure you want to delete this student?">Delete</button>
+  </form>
 </div>
 </main>
 

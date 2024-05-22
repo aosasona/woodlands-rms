@@ -10115,6 +10115,14 @@ button.uk-icon:not(:disabled){
           user-select:none
 }
 
+.list-inside{
+  list-style-position:inside
+}
+
+.list-disc{
+  list-style-type:disc
+}
+
 .grid-cols-1{
   grid-template-columns:repeat(1, minmax(0, 1fr))
 }
@@ -10402,6 +10410,7 @@ h1 {
 main.container {
   margin-top: 7rem;
   margin-inline: auto;
+  min-height: calc(100vh - 7rem);
 }
 
 nav {

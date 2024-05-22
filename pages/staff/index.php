@@ -109,7 +109,7 @@ $layout = Layout::start("Staff records");
           <td><?= $staff->createdAt->format("d/m/Y H:i") ?></td>
           <td class="space-x-4">
             <a href="/staff/<?= $staff->id ?>">View</a>
-            <a href="/staff/<?= $staff->id ?>/edit">Edit</a>
+            <a href="/staff/edit?id=<?= $staff->id ?>">Edit</a>
           </td>
         </tr>
       <?php endforeach; ?>

@@ -1,7 +1,9 @@
 <?php
 
 
+
 use App\Controllers\FileController;
+use App\State;
 use App\UI\Layout;
 use Phlo\Core\Context;
 use Woodlands\Core\Models\Staff;
@@ -38,6 +40,8 @@ $layout = Layout::start(empty($staff) ? "Not found" : "{$staff->firstName} {$sta
     return;
 ?>
 <?php endif; ?>
+
+<?php State::renderError("delete_staff") ?>
 
 <div class="flex fiex-col lg:flex-row gap-6 mt-8">
   <img src="<?= FileController::getProfilePictureUrl($staff->user->id) ?>" alt="<?= $staff->firstName . " " . $staff->lastName ?>" class="w-64 aspect-square" />

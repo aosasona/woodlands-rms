@@ -36,7 +36,13 @@ final class FileController
 
     public static function getProfilePictureUrl(int $userId): string
     {
-        return "/public/uploads/profile_images/" . self::fileNameFor($userId, "png", UploadType::ProfileImage);
+        $dir = "/public/uploads/profile_images/";
+        $name =  $dir . self::fileNameFor($userId, "png", UploadType::ProfileImage);
+        if (is_file($name)) {
+            return $name;
+        }
+
+        return $dir . self::fileNameFor($userId, "jpg", UploadType::ProfileImage);
     }
 
     public static function readProfilePictureAsBase64(int $userId): string

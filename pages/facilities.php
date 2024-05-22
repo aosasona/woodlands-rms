@@ -18,13 +18,15 @@ $layout = Layout::start("Facilities");
   ]); ?>
 
   <ul class="uk-subnav uk-subnav-primary mt-4" uk-switcher>
-      <li><a href="#">Departments</a></li>
-      <li><a href="#">Classrooms</a></li>
+    <li><a href="#">Departments</a></li>
+    <!-- <li><a href="#">Classrooms</a></li> -->
   </ul>
 
   <ul class="uk-switcher mt-5">
-      <li><?php require_once __DIR__ ."/../src/partials/department.partial.php" ?><li>
-      <li><?php require_once __DIR__ ."/../src/partials/classroom.partial.php" ?><li>
+    <li><?php require_once __DIR__ . "/../src/partials/department.partial.php" ?>
+    <li>
+    <li><?php require_once __DIR__ . "/../src/partials/classroom.partial.php" ?>
+    <li>
   </ul>
 </main>
 

@@ -49,9 +49,6 @@ final class StudentController
 			$student->gender = Gender::from($gender);
 			$student->enrolledAt = new DateTime($enrolled_at);
 
-			if (!empty($_POST["course"])) {
-				$connection->execute("INSERT INTO `student_courses` (`course_id`, `student_id`) VALUES (?, ?)", [$_POST["course"], $student->id]);
-			}
 
 			// Create user record
 			$user = User::new($connection);
@@ -62,6 +59,10 @@ final class StudentController
 
 			$student->userId = $user->id;
 			$student->save();
+
+			if (!empty($_POST["course"])) {
+				$connection->execute("INSERT INTO `student_courses` (`course_id`, `student_id`) VALUES (?, ?)", [$_POST["course"], $student->id]);
+			}
 
 			// Insert personal tutor
 			$connection->execute("INSERT INTO `student_tutors` (`student_id`, `staff_id`, `assigned_on`) VALUES (?, ?, NOW())", [$student->id, $personal_tutor]);

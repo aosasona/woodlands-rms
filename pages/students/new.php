@@ -13,7 +13,6 @@ if (!isset($mode)) {
   $mode = "create";
 }
 
-
 /** 
  * @var Context $ctx 
  * @var string $mode
@@ -33,13 +32,13 @@ $staff = Staff::new()
   ->withRelations("department")
   ->orderBy("staff.`first_name`", "ASC")->all();
 
-// If we are in 'update' mode, load the current student's records
 
 function prevValue(string $field)
 {
   return State::prevFormValue("new_student", $field);
 }
 
+// If we are in 'update' mode, load the current student's records
 if ($mode == "update") {
   $student_id = preg_replace("/[^0-9]/", "", $_GET["id"]);
   StudentController::loadSessionData($ctx, intval($student_id));

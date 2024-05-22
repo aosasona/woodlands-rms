@@ -41,6 +41,7 @@ h1 {
 main.container {
 	margin-top: 7rem;
 	margin-inline: auto;
+	min-height: calc(100vh - 7rem);
 }
 
 nav {

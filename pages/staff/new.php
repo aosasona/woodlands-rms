@@ -8,16 +8,23 @@ use Phlo\Extensions\CSRFToken;
 use Woodlands\Core\Models\Department;
 use Woodlands\Core\Models\Enums\Gender;
 
+if (!isset($mode)) {
+  $mode = "create";
+}
+
 /** @var Phlo\Core\Context $ctx * */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  StaffController::create($ctx);
-  exit;
+  if ($mode === 'update') {
+    StaffController::update($ctx);
+  } else {
+    StaffController::create($ctx);
+  }
 }
 
 $crumbs = [
   Breadcrumb::crumb(name: 'Records', disabled: true),
   Breadcrumb::crumb(name: 'Staff', path: '/staff'),
-  Breadcrumb::crumb(name: 'Add a new staff', path: '/staff/new', disabled: true),
+  Breadcrumb::crumb(name: $mode == "create" ? "Create new record" : "Update record", path: "/staff/new", disabled: true),
 ];
 
 $departments = Department::new()->all();
@@ -27,12 +34,18 @@ function prevValue(string $field)
   return State::prevFormValue('new_staff', $field);
 }
 
+// If we are in 'update' mode, load the current staff's records
+if ($mode == "update") {
+  $staff_id = preg_replace("/[^0-9]/", "", $_GET["id"]);
+  StaffController::loadSessionData($ctx, intval($staff_id));
+}
+
 $layout = Layout::start('Staff records');
 ?>
 
 
 <main class="container">
-  <h1 class="font-bold">New staff</h1>
+  <h1 class="font-bold"><?= $mode == "create" ? "New" : "Edit" ?> staff</h1>
 
   <?php Breadcrumb::render($crumbs); ?>
 
@@ -41,6 +54,12 @@ $layout = Layout::start('Staff records');
 
     <div class="w-full flex gap-6">
       <?= CSRFToken::input(field_name: CSRFToken::DEFAULT_FIELD_NAME) ?>
+
+      <input type="hidden" name="mode" value="<?= $mode ?>" />
+
+      <?php if ($mode === "update") : ?>
+        <input type="hidden" name="staff_id" value="<?= $staff_id ?>" />
+      <?php endif; ?>
 
       <!-- Profile image -->
       <div class="mb-6">
@@ -79,7 +98,7 @@ $layout = Layout::start('Staff records');
           <select name="department_id" id="department-id" class="uk-select">
             <option></option>
             <?php foreach ($departments as $department) { ?>
-              <option value="<?= $department->id ?>"><?= $department->name ?></option>
+              <option value="<?= $department->id ?>" <?= prevValue('department_id') == $department->id ? 'selected' : '' ?>><?= ucwords($department->name) ?></option>
             <?php } ?>
           </select>
         </div>
@@ -113,13 +132,16 @@ $layout = Layout::start('Staff records');
           <input type="date" name="hire_date" class="uk-input" placeholder="Hire date" value="<?= prevValue('hire_date') ?>" required />
         </div>
 
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input class="uk-input" type="password" id="password" name="password" placeholder="******" aria-label="Password" />
-          <div class="text-right mt-2">
-            <a href="#" onclick="javascript:void(0)" class="text-xs" data-password-toggle="password">Show password</a>
+        <?php if ($mode == "create") { ?>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input class="uk-input" type="password" id="password" name="password" placeholder="******" aria-label="Password" />
+            <div class="text-right mt-2">
+              <a href="#" onclick="javascript:void(0)" class="text-xs" data-password-toggle="password">Show password</a>
+            </div>
           </div>
-        </div>
+        <?php } ?>
+
       </div>
 
     </div>

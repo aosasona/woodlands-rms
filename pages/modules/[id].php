@@ -32,6 +32,7 @@ if (empty($module)) {
 }
 
 $parent_courses = Connection::getInstance()->query("SELECT c.* FROM `courses` c JOIN `course_modules` cm ON c.`course_id` = cm.`course_id` WHERE cm.`module_id` = :module_id", ["module_id" => $module_id])->fetchAll(PDO::FETCH_ASSOC);
+$students = Connection::getInstance()->query("SELECT s.* FROM `students` s JOIN `student_modules` sm ON s.`student_id` = sm.`student_id` WHERE sm.`module_id` = :module_id", ["module_id" => $module_id])->fetchAll(PDO::FETCH_ASSOC);
 
 $layout = Layout::start("Modules");
 ?>
@@ -47,8 +48,26 @@ $layout = Layout::start("Modules");
   ]); ?>
 
   <h1 class="mt-4"><?= strtoupper($module->code) ?> - <?= ucwords($module->name) ?></h1>
-  <h2 class="text-lg font-bold mt-4">Description</h2>
-  <?= $module->description ?>
+
+  <div class="mt-4">
+    <h2 class="text-lg font-bold">Description</h2>
+    <?= $module->description ?>
+  </div>
+
+  <div class="mt-4">
+    <h2 class="text-xl font-bold">Students</h2>
+    <?php if (empty($students)) : ?>
+      <p class="text-gray-400"><i>No students assigned to this module.</i></p>
+    <?php else : ?>
+
+      <ul class="list-disc list-inside">
+        <?php foreach ($students as $student) : ?>
+          <li><a href="/students/<?= $student["student_id"] ?>"><?= ucwords("{$student["first_name"]} {$student["last_name"]}") ?></a></li>
+        <?php endforeach; ?>
+
+      </ul>
+    <?php endif; ?>
+  </div>
 </main>
 
 <?php $layout->end(); ?>
