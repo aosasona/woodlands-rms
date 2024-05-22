@@ -85,4 +85,8 @@ final class CourseController
             ExceptionHandler::handle(action: "new_course", exception: $e, context: $ctx, redirect_to: "/courses/new");
         }
     }
+
+    public static function loadSessionData(Context $ctx): void
+    {
+    }
 }

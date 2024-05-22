@@ -203,12 +203,15 @@ final class StaffController
     {
         try {
             $staff_id = intval($_POST["staff_id"]);
+            if (empty($staff_id)) throw new AppException("Staff ID is required");
+
             $staff = Staff::new()->findById($staff_id);
             $staff->delete();
 
             $ctx->redirect("/staff");
         } catch (\Exception $e) {
-            ExceptionHandler::handle(action: "delete_staff", exception: $e, context: $ctx, redirect_to: "/staff");
+            $sid = $_POST["staff_id"] ?? "";
+            ExceptionHandler::handle(action: "delete_staff", exception: $e, context: $ctx, redirect_to: "/staff/$sid");
         }
     }
 }

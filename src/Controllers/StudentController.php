@@ -185,12 +185,15 @@ final class StudentController
 	{
 		try {
 			$student_id = intval($_POST["student_id"]);
+			if (empty($student_id)) throw new AppException("Student ID is required");
+
 			$student = Student::new()->findById($student_id);
 			$student->delete();
 
 			$ctx->redirect("/students");
 		} catch (\Exception $e) {
-			ExceptionHandler::handle(action: "delete_student", exception: $e, context: $ctx, redirect_to: "/students");
+			$sid = $_POST["student_id"] ?? "";
+			ExceptionHandler::handle(action: "delete_student", exception: $e, context: $ctx, redirect_to: "/students/{$sid}");
 		}
 	}
 

@@ -2,7 +2,7 @@
 
 
 
-use App\Controllers\FileController;
+use App\Controllers\{FileController, StaffController};
 use App\State;
 use App\UI\Layout;
 use Phlo\Core\Context;
@@ -14,6 +14,10 @@ use Woodlands\Core\Database\Connection;
 $staff_id = preg_replace(pattern: "[^0-9]", replacement: "",  subject: $ctx->getParam("id", ""));
 if (empty($staff_id)) {
   $ctx->redirect("/staff");
+}
+
+if ($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST["action"]) && $_POST["action"] === "delete") {
+  StaffController::delete($ctx);
 }
 
 $staff = Staff::new()
@@ -64,8 +68,10 @@ $layout = Layout::start(empty($staff) ? "Not found" : "{$staff->firstName} {$sta
 
 <div class="flex items-center gap-3 mt-3">
   <a href="/staff/edit?id=<?= $staff->id ?>" class="uk-button uk-button-small uk-button-primary">Edit</a>
-  <form method="POST">
-    <a href="" class="uk-button uk-button-small uk-button-danger" data-confirm="Are you sure you want to delete this staff?">Delete</a>
+  <form method="post">
+    <input type="hidden" name="action" value="delete" />
+    <input type="hidden" name="staff_id" value="<?= $staff->id ?>" />
+    <button type="submit" class="uk-button uk-button-small uk-button-danger" data-confirm="Are you sure you want to delete this staff?">Delete</button>
   </form>
 </div>
 </main>

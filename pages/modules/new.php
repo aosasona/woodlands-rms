@@ -13,7 +13,6 @@ use Woodlands\Core\Models\Staff;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   ModuleController::create($ctx);
-  exit;
 }
 
 $prev = State::curryPrevFormValue("new_module");
@@ -36,11 +35,12 @@ $layout = Layout::start("New module");
   <?php Breadcrumb::render($breadcrumbs); ?>
 
   <form method="POST" class="mt-6">
+
     <?php State::renderError("new_module") ?>
 
     <?= CSRFToken::input(field_name: CSRFToken::DEFAULT_FIELD_NAME) ?>
 
-    <div class="w-5/6 grid grid-cols-9 gap-6">
+    <div class="w-5/6 grid grid-cols-9 gap-6 mt-12">
       <section class="col-span-4">
         <div class="input-group">
           <label for="name">Name</label>

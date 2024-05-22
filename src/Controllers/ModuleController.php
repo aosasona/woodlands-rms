@@ -41,6 +41,12 @@ final class ModuleController
 
             ["name" => $name, "code" => $code, "description" => $description, "tutors" => $tutors] = $validation->getValidatedData();
 
+            // Check if module already exists
+            $module = Module::new()->where("code", "=", $code)->or("name",  "=", strtolower($name))->one();
+            if ($module) {
+                throw new AppException("Module with the same name or code already exists");
+            }
+
             $conn_instance = Connection::getInstance();
             $conn = $conn_instance->getConnection();
             $conn->beginTransaction();
